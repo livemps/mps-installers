@@ -28,6 +28,9 @@ help:
 # +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 prepare:
 	echo "Yes" | pacman -Syy && echo "Yes" | pacman -Syu
+yay:
+	-git clone https://aur.archlinux.org/yay.git 
+	cd yay && makepkg -si
 # +++++ Installers (VIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./vim-9.0.tar.bz2:
 	wget $(VIM90_URL)
@@ -47,8 +50,8 @@ vim-uninstall:
 	wget $(NEOVIM_URL)
 neovim-pre-install: prepare ./nvim-linux64.deb
 	
-neovim: neovim-pre-install
-	dpkg -i nvim-linux64.deb
+neovim: neovim-pre-install yay
+	echo "HERE"
 neovim-post-install: neovim
 	
 neovim-uninstall:

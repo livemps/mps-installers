@@ -16,10 +16,10 @@ else
 	MKEXT :=none
 endif
 # --- Test root user
-usertest:
-ifneq ($(SETUPUSER),0)
-	$(error No Privileges! Please start as root)
-endif
+# usertest:
+# ifneq ($(SETUPUSER),0)
+# 	$(error No Privileges! Please start as root)
+# endif
 # --- Test distro
 distrotest:
 ifeq ($(MKEXT),none)
@@ -44,9 +44,9 @@ help:
 	@echo "  Example: make DISTRO=debian install "
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: usertest distrotest
+install: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) install
-uninstall: usertest distrotest
+uninstall: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) uninstall
-status: usertest distrotest
+status: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) status
