@@ -26,17 +26,17 @@ help:
 	@echo ""
 # +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 prepare:
-	echo "Yes" | pacman -Syy && echo "Yes" | pacman -Syu
+	echo "Yes" | sudo pacman -Syy && echo "Yes" | sudo pacman -Syu
 # +++++ Installers (VIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./vim-9.0.tar.bz2:
 	wget $(VIM90_URL)
 ./vim90: ./vim-9.0.tar.bz2
 	tar xjvf ./vim-9.0.tar.bz2
 vim: prepare ./vim90
-	cd vim90 && ./configure && make -j32 && make install
+	cd vim90 && ./configure && make -j32 && sudo make install
 	rm -rf ./vim-9.0.tar.bz2
 vim-uninstall:
-	cd vim90 && make uninstall
+	cd vim90 && sudo make uninstall
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./nvim-linux64.deb:
 	wget $(NEOVIM_URL)
