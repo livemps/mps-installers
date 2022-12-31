@@ -26,36 +26,26 @@ help:
 	@echo ""
 # +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 prepare:
-	apt update --yes && apt upgrade --yes
+	sudo apt update --yes && sudo apt upgrade --yes
 # +++++ Installers (VIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./vim-9.0.tar.bz2:
 	wget $(VIM90_URL)
 ./vim90: ./vim-9.0.tar.bz2
 	tar xjvf ./vim-9.0.tar.bz2
-vim-pre-install: prepare ./vim90
-	
-vim: vim-pre-install
-	cd vim90 && ./configure && make -j32 && make install
+vim: prepare ./vim90
+	cd vim90 && ./configure && make -j32 && sudo make install
 	rm -rf ./vim-9.0.tar.bz2
-vim-post-install: vim
-	
 vim-uninstall:
-	cd vim90 && make uninstall
+	cd vim90 && sudo make uninstall
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./nvim-linux64.deb:
 	wget $(NEOVIM_URL)
-neovim-pre-install: prepare ./nvim-linux64.deb
-	
-neovim: neovim-pre-install
+neovim: prepare ./nvim-linux64.deb
 	dpkg -i nvim-linux64.deb
-neovim-post-install: neovim
-	
 neovim-uninstall:
 	apt remove neovim
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-pre-install: vim-pre-install neovim-pre-install
 install: vim neovim
-post-install: vim-post-install neovim-post-install
 uninstall: vim-uninstall neovim-uninstall
 status: 
 	@echo "Status vim"
