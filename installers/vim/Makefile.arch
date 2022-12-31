@@ -4,8 +4,7 @@
 default: install
 .PHONY: default help pre-install install post-install \
 			uninstall status prepare \
-			vim-pre-install vim vim-post-install vim-uninstall \
-			neovim-pre-install neovim neovim-post-install neovim-uninstall \
+			vim vim-uninstall neovim neovim-uninstall \
 # --- Installer Setup ---#
 VIM90_URL := https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
 NEOVIM_URL := \
@@ -28,37 +27,25 @@ help:
 # +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 prepare:
 	echo "Yes" | pacman -Syy && echo "Yes" | pacman -Syu
-yay:
-	sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 # +++++ Installers (VIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./vim-9.0.tar.bz2:
 	wget $(VIM90_URL)
 ./vim90: ./vim-9.0.tar.bz2
 	tar xjvf ./vim-9.0.tar.bz2
-vim-pre-install: prepare ./vim90
-	
-vim: vim-pre-install
+vim: prepare ./vim90
 	cd vim90 && ./configure && make -j32 && make install
 	rm -rf ./vim-9.0.tar.bz2
-vim-post-install: vim
-	
 vim-uninstall:
 	cd vim90 && make uninstall
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./nvim-linux64.deb:
 	wget $(NEOVIM_URL)
-neovim-pre-install: prepare ./nvim-linux64.deb
-	
-neovim: neovim-pre-install yay
-	echo "HERE"
-neovim-post-install: neovim
+neovim:  prepare ./nvim-linux64.deb
 	
 neovim-uninstall:
 	apt remove neovim
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-pre-install: vim-pre-install neovim-pre-install
 install: vim neovim
-post-install: vim-post-install neovim-post-install
 uninstall: vim-uninstall neovim-uninstall
 status: 
 	@echo "Status vim"

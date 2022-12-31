@@ -1,8 +1,9 @@
 FROM livemps/mps-min-arch
-RUN mkdir -p /mps
-RUN git clone https://github.com/livemps/mps-installers /mps/mps-installers
-RUN cd /mps/mps-installers/ && git config pull.ff only && git pull && cd installers/vim && make install
-RUN sudo chmod a+rw -R /mps
+RUN mkdir -p /mps \
+    && git clone https://github.com/livemps/mps-installers /mps/mps-installers \
+    && cd /mps/mps-installers/ && git config pull.ff only \
+    && git pull && cd installers/vim && make install \
+    && sudo chmod a+rw -R /mps
 USER mps
 WORKDIR /home/mps
 ENTRYPOINT ["/bin/bash"]
