@@ -39,7 +39,7 @@ vim-uninstall:
 	cd vim90 && sudo make uninstall
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 neovim:  prepare
-	sudo pacman -S neovim
+	echo "Yes" | sudo pacman --noconfirm -S neovim
 neovim-uninstall:
 	sudo pacman -R neovim
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
