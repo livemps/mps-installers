@@ -2,23 +2,11 @@
 # --- Makefile Setup ---#
 default: install
 .PHONY: default help install uninstall status usertest distrotest
-# +++++ Environment checks ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-# --- Early Shells 
-DISTROTEST_DEBIAN := $(shell lsb_release -is)
-DISTROTEST_ARCH := $(shell lsb_release -is)
-# --- Check Distro (Auto)
-ifeq ($(DISTROTEST_ARCH),Arch)
-	MKEXT :=arch
-else ifeq ($(DISTROTEST_DEBIAN),Debian)
-	MKEXT :=debian
-else
-	MKEXT :=none
-endif
-# --- Test distro
-distrotest:
-ifeq ($(MKEXT),none)
-	$(error DISTRO not found and auto detection failed!)
-endif
+# --- MPS Setup ---#
+TEST_TARGETS ?= vim
+define doJobs
+	for target in $(TEST_TARGETS) ; do make -C $$target/ $(1) ; done
+endef
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -38,9 +26,9 @@ help:
 	@echo "  Example: make DISTRO=debian install "
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: distrotest
-	@make --no-print-directory -f Makefile.$(MKEXT) install
-uninstall: distrotest
-	@make --no-print-directory -f Makefile.$(MKEXT) uninstall
-status: distrotest
-	@make --no-print-directory -f Makefile.$(MKEXT) status
+install:
+	$(call doJobs,$@)
+uninstall:
+	$(call doJobs,$@)
+status:
+	$(call doJobs,$@)

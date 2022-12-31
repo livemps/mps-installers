@@ -1,8 +1,0 @@
-FROM livemps/mps-min-debian
-RUN mkdir -p /mps \
-    && git clone https://github.com/livemps/mps-installers /mps/mps-installers \
-    && cd /mps/mps-installers/ && git config pull.ff only && git pull && cd installers/vim && make install \
-    && sudo chmod a+rw -R /mps
-USER mps
-WORKDIR /home/mps
-ENTRYPOINT ["/bin/bash"]
