@@ -2,13 +2,12 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help pre-install install post-install \
-			uninstall status prepare \
-			vim-pre-install vim vim-post-install vim-uninstall \
-			neovim-pre-install neovim neovim-post-install neovim-uninstall \
+.PHONY: default help install uninstall status prepare \
+			vim vim-uninstall neovim neovim-uninstall \
 # --- Installer Setup ---#
 VIM90_URL := https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
-NEOVIM_URL := https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+NEOVIM_URL := \
+	https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""

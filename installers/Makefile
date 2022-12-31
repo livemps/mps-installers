@@ -3,9 +3,9 @@
 default: install
 .PHONY: default help install uninstall status usertest distrotest
 # --- MPS Setup ---#
-TEST_TARGETS ?= vim
+INST ?= vim
 define doJobs
-	for target in $(TEST_TARGETS) ; do make -C $$target/ $(1) ; done
+	for target in $(INST) ; do make -C $$target/ $(1) ; done
 endef
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
