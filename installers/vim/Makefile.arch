@@ -38,12 +38,10 @@ vim: prepare ./vim90
 vim-uninstall:
 	cd vim90 && sudo make uninstall
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-./nvim-linux64.deb:
-	wget $(NEOVIM_URL)
-neovim:  prepare ./nvim-linux64.deb
-	
+neovim:  prepare
+	sudo pacman -S neovim
 neovim-uninstall:
-	apt remove neovim
+	sudo pacman -R neovim
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: vim neovim
 uninstall: vim-uninstall neovim-uninstall
