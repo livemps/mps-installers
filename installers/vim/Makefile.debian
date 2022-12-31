@@ -41,9 +41,9 @@ vim-uninstall:
 ./nvim-linux64.deb:
 	wget $(NEOVIM_URL)
 neovim: prepare ./nvim-linux64.deb
-	dpkg -i nvim-linux64.deb
+	sudo dpkg -i nvim-linux64.deb
 neovim-uninstall:
-	apt remove neovim
+	sudo apt remove neovim
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: vim neovim
 uninstall: vim-uninstall neovim-uninstall
