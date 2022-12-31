@@ -29,8 +29,7 @@ help:
 prepare:
 	echo "Yes" | pacman -Syy && echo "Yes" | pacman -Syu
 yay:
-	-git clone https://aur.archlinux.org/yay.git 
-	cd yay && makepkg -si
+	sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 # +++++ Installers (VIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./vim-9.0.tar.bz2:
 	wget $(VIM90_URL)
