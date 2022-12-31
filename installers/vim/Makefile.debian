@@ -1,0 +1,35 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status
+VIM90_SRC := https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
+
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+./vim-9.0.tar.bz2:
+	wget https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
+./vim90: ./vim-9.0.tar.bz2
+	tar xjvf ./vim-9.0.tar.bz2
+install: ./vim90
+	apt update --yes && apt upgrade --yes
+	cd vim90 && ./configure && make -j32 && make install
+	rm -rf ./vim-9.0.tar.bz2
+uninstall: 
+	cd vim90 && make uninstall
+status: 
+	@echo "Status vim"
