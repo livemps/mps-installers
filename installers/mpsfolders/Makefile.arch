@@ -20,6 +20,8 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install:
+	@echo "Install Skeleton"
 uninstall:
+	@echo "Uninstall Skeleton"
 status: 
 	@echo "Status"

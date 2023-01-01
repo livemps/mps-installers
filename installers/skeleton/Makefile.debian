@@ -2,8 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status \
-			homedir-install homedir-uninstall \
+.PHONY: default help install uninstall status
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -20,7 +19,9 @@ help:
 	@echo "  Example: make install"
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: 
+install:
+	@echo "Install mpsfolder"
 uninstall:
+	@echo "Uninstall mpsfolders"
 status: 
-	@echo "Status vim"
+	@echo "Status"

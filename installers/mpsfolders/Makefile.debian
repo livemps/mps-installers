@@ -19,7 +19,9 @@ help:
 	@echo "  Example: make install"
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: 
+install:
+	@echo "Install Skeleton"
 uninstall:
+	@echo "Uninstall Skeleton"
 status: 
 	@echo "Status"
