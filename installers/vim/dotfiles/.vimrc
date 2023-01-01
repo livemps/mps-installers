@@ -99,15 +99,15 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 " Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " If another buffer tries to replace NERDTree, 
 " put it in the other window, and bring back NERDTree
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+"autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 " Open the existing NERDTree on each new tab.
 " autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -142,27 +142,27 @@ tnoremap <Esc> <C-\><C-n>       " Escape terminal
 " This tends to slow down redrawing, but is very useful.
 " Based on https://groups.google.com/d/msg/vim_use/IJU-Vk-QLJE/xz4hjPjCRBUJ
 " XXX: this will only work with lines containing text (i.e. not '~')
-function! s:DimInactiveWindows()
-  for i in range(1, tabpagewinnr(tabpagenr(), '$'))
-    let l:range = ""
-    if i != winnr()
-      if &wrap
-        " HACK: when wrapping lines is enabled, we use the maximum number
-        " of columns getting highlighted. This might get calculated by
-        " looking for the longest visible line and using a multiple of
-        " winwidth().
-        let l:width=256 " max
-      else
-        let l:width=winwidth(i)
-      endif
-      let l:range = join(range(1, l:width), ',')
-    endif
-    call setwinvar(i, '&colorcolumn', l:range)
-  endfor
-endfunction
-augroup DimInactiveWindows
-  au!
-  au WinEnter * call s:DimInactiveWindows()
-  au WinEnter * set cursorline
-  au WinLeave * set nocursorline
-augroup END
+" function! s:DimInactiveWindows()
+"   for i in range(1, tabpagewinnr(tabpagenr(), '$'))
+"     let l:range = ""
+"     if i != winnr()
+"       if &wrap
+"         " HACK: when wrapping lines is enabled, we use the maximum number
+"         " of columns getting highlighted. This might get calculated by
+"         " looking for the longest visible line and using a multiple of
+"         " winwidth().
+"         let l:width=256 " max
+"       else
+"         let l:width=winwidth(i)
+"       endif
+"       let l:range = join(range(1, l:width), ',')
+"     endif
+"     call setwinvar(i, '&colorcolumn', l:range)
+"   endfor
+" endfunction
+" augroup DimInactiveWindows
+"   au!
+"   au WinEnter * call s:DimInactiveWindows()
+"   au WinEnter * set cursorline
+"   au WinLeave * set nocursorline
+" augroup END
