@@ -4,5 +4,6 @@ WORKDIR /home/mps
 RUN mkdir -p ~/mps/repo/github.com/mps/ && cd ~/mps/repo/github.com/mps/ \
     && git clone https://github.com/livemps/mps-installers \
     && cd mps-installers && git config pull.ff only && git pull 
-#RUN make -C installers INST=vim install
+RUN cd ~/mps/repo/github.com/mps/mps-installers/installers \
+    && make INST="vim mpsfolders skeleton" install
 ENTRYPOINT ["/bin/bash"]

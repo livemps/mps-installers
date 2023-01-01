@@ -3,7 +3,7 @@
 .ONESHELL:
 default: install
 .PHONY: default help pre-install install post-install \
-			uninstall status prepare \
+			uninstall status \
 			vim vim-uninstall neovim neovim-uninstall vimrc neovimrc \
 # --- Installer Setup ---#
 VIM90_URL := https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
@@ -27,9 +27,6 @@ help:
 	@echo ""
 	@echo "  Example: make install"
 	@echo ""
-# +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-prepare:
-	echo "Yes" | sudo pacman -Syy && echo "Yes" | sudo pacman -Syu
 # +++++ Installers (VIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./vim-9.0.tar.bz2:
 	wget $(VIM90_URL)
@@ -39,7 +36,7 @@ $(VIMPLUG_FOLDER):
 	-curl -fLo $(VIMPLUG_FOLDER) --create-dirs $(VIMPLUG_URL)
 vimrc:
 	cp dotfiles/.vimrc ~/.vimrc
-vim: prepare ./vim90 vimrc $(VIMPLUG_FOLDER)
+vim: ./vim90 vimrc $(VIMPLUG_FOLDER)
 	cd vim90 && ./configure && make -j32 && sudo make install
 	rm -rf ./vim-9.0.tar.bz2
 vim-uninstall:
@@ -51,7 +48,7 @@ $(NVIMPLUG_FOLDER):
 neovimrc:
 	-mkdir -p ~/.config
 	cp -r dotfiles/nvim ~/.config
-neovim:  prepare neovimrc $(NVIMPLUG_FOLDER)
+neovim: neovimrc $(NVIMPLUG_FOLDER)
 	echo "Yes" | sudo pacman --noconfirm -S neovim
 neovim-uninstall:
 	sudo pacman -R neovim

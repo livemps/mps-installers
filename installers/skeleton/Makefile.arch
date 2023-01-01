@@ -2,7 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status prepare
+.PHONY: default help install uninstall status
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -18,12 +18,8 @@ help:
 	@echo ""
 	@echo "  Example: make install"
 	@echo ""
-# +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-prepare:
-	@echo "Yes" | sudo pacman --noconfirm -Syu \
-		&& echo "Yes" | sudo pacman --noconfirm -Syy
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: prepare
+install: 
 uninstall:
 status: 
 	@echo "Status"

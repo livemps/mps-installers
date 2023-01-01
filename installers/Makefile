@@ -35,6 +35,11 @@ distrotest:
 	@echo "MKEXT: $(MKEXT)"
 ifeq ($(MKEXT),none)
 	$(error DISTRO not found and auto detection failed!)
+else ifeq ($(MKEXT),arch)
+	echo "Yes" | sudo pacman --noconfirm -Syy \
+	&& echo "YES" | sudo pacman --noconfirm -Syu
+else ifeq ($(MKEXT),debian)
+	sudo apt update --yes && sudo apt upgrade --yes
 endif
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
@@ -60,9 +65,9 @@ help:
 	@echo "  Example: make DISTRO=debian INST="vim mpsfolders" install"
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install:
+install: distrotest
 	$(call doJobs,$@)
-uninstall:
+uninstall: distrotest
 	$(call doJobs,$@)
 status:
 	$(call doJobs,$@)

@@ -2,7 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status prepare \
+.PHONY: default help install uninstall status \
 			homedir-install homedir-uninstall \
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
@@ -19,11 +19,8 @@ help:
 	@echo ""
 	@echo "  Example: make install"
 	@echo ""
-# +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-prepare:
-	sudo apt update --yes && sudo apt upgrade --yes
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: prepare
+install: 
 uninstall:
 status: 
 	@echo "Status vim"
