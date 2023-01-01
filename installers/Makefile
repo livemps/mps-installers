@@ -7,7 +7,7 @@ INST ?= mpsfolders
 define doJobs
 	@for target in $(INST) ; do \
 		echo "# --- <$$target> ---"  ; \
-		make -C $$target/ $(1) ; \
+		make --no-print-directory -C $$target/ $(1) ; \
 		echo "# --- </$$target> ---" ; \
 	done
 endef
