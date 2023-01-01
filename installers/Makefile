@@ -5,8 +5,8 @@ default: install
 # --- MPS Setup ---#
 INST ?= mpsfolders
 define doJobs
-	@for target in <$(INST)> ; do \
-		echo "# --- $$target ---"  ; \
+	@for target in $(INST) ; do \
+		echo "# --- <$$target> ---"  ; \
 		make -C $$target/ $(1) ; \
 		echo "# --- </$$target> ---" ; \
 	done
@@ -68,6 +68,7 @@ status:
 	$(call doJobs,$@)
 docker-clean: distrotest
 	-docker container rm mps-min-$(MKEXT)
+	-docker rmi $(docker images -a -f 'dangling=true' -q)
 	-docker rmi mps-min-$(MKEXT)
 docker-build: distrotest docker-clean
 	docker build -t mps-min-$(MKEXT) . -f Dockerfile.$(MKEXT)
