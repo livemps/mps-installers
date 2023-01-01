@@ -1,7 +1,7 @@
 # +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Makefile Setup ---#
 default: install
-.PHONY: default help install uninstall status usertest distrotest
+.PHONY: default help install uninstall status usertest distrotest upgrade
 # --- MPS Setup ---#
 INST ?= mpsfolders
 define doJobs
@@ -31,15 +31,17 @@ else
 	endif
 endif
 # --- Test distro
-distrotest:
-	@echo "MKEXT: $(MKEXT)"
-ifeq ($(MKEXT),none)
-	$(error DISTRO not found and auto detection failed!)
-else ifeq ($(MKEXT),arch)
+upgrade:
+ifeq ($(MKEXT),arch)
 	echo "Yes" | sudo pacman --noconfirm -Syy \
 	&& echo "YES" | sudo pacman --noconfirm -Syu
 else ifeq ($(MKEXT),debian)
 	sudo apt update --yes && sudo apt upgrade --yes
+endif
+# --- Test distro
+distrotest:
+ifeq ($(MKEXT),none)
+	$(error DISTRO not found and auto detection failed!)
 endif
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
@@ -65,9 +67,9 @@ help:
 	@echo "  Example: make DISTRO=debian INST="vim mpsfolders" install"
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: distrotest
+install: distrotest upgrade
 	$(call doJobs,$@)
-uninstall: distrotest
+uninstall: distrotest upgrade
 	$(call doJobs,$@)
 status:
 	$(call doJobs,$@)
