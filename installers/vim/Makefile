@@ -7,6 +7,18 @@ default: install
 DISTROTEST_DEBIAN 	:= $(shell lsb_release -is)
 DISTROTEST_ARCH 	:= $(shell lsb_release -is)
 LOGFILE				:=error.log
+define printTask
+	@echo -n $(2)
+	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) $(1)) \
+			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
+		if [ $$RET -eq 0 ] ; then \
+			echo $(3) ; \
+		else \
+			echo $(4) ; \
+			cat $(LOGFILE) ; \
+		fi
+endef
+
 # --- Check Distro (Auto)
 ifeq ($(DISTROTEST_ARCH),Arch)
 	MKEXT :=arch
@@ -40,15 +52,7 @@ help:
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: distrotest
-	@echo -n "Installing..."
-	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) install \
-			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
-		if [ $$RET -eq 0 ] ; then \
-			echo "Done!" ; \
-		else \
-			echo "Error!" ; \
-			cat $$LOGFILE ; \
-		fi
+	$(call printTask,$@, "Installing...", "Done!", "Error!")
 uninstall: distrotest
 	@echo -n "Removing..."
 	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) uninstall \
