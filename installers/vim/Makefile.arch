@@ -42,7 +42,6 @@ vimrc:
 vim: prepare ./vim90 vimrc $(VIMPLUG_FOLDER)
 	cd vim90 && ./configure && make -j32 && sudo make install
 	rm -rf ./vim-9.0.tar.bz2
-	vim -c "PlugInstall" -c "qa"
 vim-uninstall:
 	cd vim90 && sudo make uninstall
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -54,7 +53,6 @@ neovimrc:
 	cp -r dotfiles/nvim ~/.config
 neovim:  prepare neovimrc $(NVIMPLUG_FOLDER)
 	echo "Yes" | sudo pacman --noconfirm -S neovim
-	nvim -c "PackerSync" -c "qa"
 neovim-uninstall:
 	sudo pacman -R neovim
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
