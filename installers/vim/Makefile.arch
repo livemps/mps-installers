@@ -1,4 +1,4 @@
-# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+ # +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
@@ -9,6 +9,9 @@ default: install
 VIM90_URL := https://ftp.nluug.nl/pub/vim/unix/vim-9.0.tar.bz2
 NEOVIM_URL := \
 	https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+VIMPLUG_FOLDER      :=~/.vim/autoload/plug.vim
+NVIMPLUG_FOLDER     :=~/.local/share/nvim/site/autoload/plug.vim
+VIMPLUG_URL         :=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -32,18 +35,23 @@ prepare:
 	wget $(VIM90_URL)
 ./vim90: ./vim-9.0.tar.bz2
 	tar xjvf ./vim-9.0.tar.bz2
+$(VIMPLUG_FOLDER): 
+	-curl -fLo $(VIMPLUG_FOLDER) --create-dirs $(VIMPLUG_URL)
 vimrc:
 	cp dotfiles/.vimrc ~/.vimrc
-vim: prepare ./vim90 vimrc
+vim: prepare ./vim90 vimrc $(VIMPLUG_FOLDER)
 	cd vim90 && ./configure && make -j32 && sudo make install
 	rm -rf ./vim-9.0.tar.bz2
 vim-uninstall:
 	cd vim90 && sudo make uninstall
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+$(NVIMPLUG_FOLDER): 
+	-mkdir ~/.config/nvim
+	-curl -fLo $(NVIMPLUG_FOLDER) --create-dirs $(VIMPLUG_URL)
 neovimrc:
 	-mkdir -p ~/.config
 	cp -r dotfiles/nvim ~/.config
-neovim:  prepare neovimrc
+neovim:  prepare neovimrc $(NVIMPLUG_FOLDER)
 	echo "Yes" | sudo pacman --noconfirm -S neovim
 neovim-uninstall:
 	sudo pacman -R neovim

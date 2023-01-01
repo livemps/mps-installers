@@ -34,11 +34,11 @@ prepare:
 	wget $(VIM90_URL)
 ./vim90: ./vim-9.0.tar.bz2
 	tar xjvf ./vim-9.0.tar.bz2
-$(VIMPLUG): 
+$(VIMPLUG_FOLDER): 
 	-curl -fLo $(VIMPLUG_FOLDER) --create-dirs $(VIMPLUG_URL)
 vimrc:
 	cp dotfiles/.vimrc ~/.vimrc
-vim: prepare ./vim90 vimrc $(VIMPLUG)
+vim: prepare ./vim90 vimrc $(VIMPLUG_FOLDER)
 	cd vim90 && ./configure && make -j32 && sudo make install
 	rm -rf ./vim-9.0.tar.bz2
 vim-uninstall:
@@ -46,13 +46,13 @@ vim-uninstall:
 # +++++ Installers (NEOVIM) ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ./nvim-linux64.deb:
 	wget $(NEOVIM_URL)
-$(NVIMPLUG): 
+$(NVIMPLUG_FOLDER): 
 	-mkdir ~/.config/nvim
 	-curl -fLo $(NVIMPLUG_FOLDER) --create-dirs $(VIMPLUG_URL)
 neovimrc:
 	-mkdir -p ~/.config
 	cp -r dotfiles/nvim ~/.config
-neovim: prepare ./nvim-linux64.deb neovimrc $(NVIMPLUG)
+neovim: prepare ./nvim-linux64.deb neovimrc $(NVIMPLUG_FOLDER)
 	sudo dpkg -i nvim-linux64.deb
 neovim-uninstall:
 	sudo apt remove neovim
