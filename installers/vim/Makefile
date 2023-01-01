@@ -7,9 +7,10 @@ default: install
 DISTROTEST_DEBIAN 	:= $(shell lsb_release -is)
 DISTROTEST_ARCH 	:= $(shell lsb_release -is)
 LOGFILE				:=error.log
+# --- Logging
 define printTask
 	@echo -n $(2)
-	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) $(1)) \
+	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) $(1) \
 			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
 		if [ $$RET -eq 0 ] ; then \
 			echo $(3) ; \
@@ -18,7 +19,6 @@ define printTask
 			cat $(LOGFILE) ; \
 		fi
 endef
-
 # --- Check Distro (Auto)
 ifeq ($(DISTROTEST_ARCH),Arch)
 	MKEXT :=arch
@@ -26,11 +26,6 @@ else ifeq ($(DISTROTEST_DEBIAN),Debian)
 	MKEXT :=debian
 else
 	MKEXT :=none
-endif
-# --- Test distro
-distrotest:
-ifeq ($(MKEXT),none)
-	$(error DISTRO not found and auto detection failed!)
 endif
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
@@ -51,25 +46,15 @@ help:
 	@echo "  Example: make DISTRO=debian install "
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Test distro
+distrotest:
+ifeq ($(MKEXT),none)
+	$(error DISTRO not found and auto detection failed!)
+endif
+# --- Default targets
 install: distrotest
-	$(call printTask,$@,"Installing...","Done!","Error!")
+	$(call printTask,$@,"Installing...","Success","Error")
 uninstall: distrotest
-	@echo -n "Removing..."
-	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) uninstall \
-			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
-		if [ $$RET -eq 0 ] ; then \
-			echo "Done!" ; \
-		else \
-			echo "Error!" ; \
-			cat $$LOGFILE ; \
-		fi
+	$(call printTask,$@,"Uninstalling...","Success","Error")
 status: distrotest
-	@echo -n "Status: "
-	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) status \
-			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
-		if [ $$RET -eq 0 ] ; then \
-			echo "OK!" ; \
-		else \
-			echo "Error!" ; \
-			cat $$LOGFILE ; \
-		fi
+	$(call printTask,$@,"Status: ","OK","Error")
