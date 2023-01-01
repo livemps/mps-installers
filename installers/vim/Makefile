@@ -7,6 +7,7 @@ default: install
 DISTROTEST_DEBIAN 	:= $(shell lsb_release -is)
 DISTROTEST_ARCH 	:= $(shell lsb_release -is)
 LOGFILE				:=error.log
+NAME				:= $(shell basename $$PWD)
 # --- Logging
 define printTask
 	@echo -n $(2)
@@ -53,8 +54,8 @@ ifeq ($(MKEXT),none)
 endif
 # --- Default targets
 install: distrotest
-	$(call printTask,$@,"Installing...","Success","Error")
+	$(call printTask,$@,"Installing $(NAME)...","Success","Error")
 uninstall: distrotest
-	$(call printTask,$@,"Uninstalling...","Success","Error")
+	$(call printTask,$@,"Uninstalling $(NAME)...","Success","Error")
 status: distrotest
-	$(call printTask,$@,"Status: ","OK","Error")
+	$(call printTask,$@,"Status $(NAME): ","OK","Error")
