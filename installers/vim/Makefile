@@ -52,7 +52,7 @@ help:
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: distrotest
-	$(call printTask,$@, "Installing...", "Done!", "Error!")
+	$(call printTask,$@,"Installing...","Done!","Error!")
 uninstall: distrotest
 	@echo -n "Removing..."
 	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) uninstall \
