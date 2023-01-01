@@ -39,7 +39,7 @@ help:
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: distrotest
-	FOO=$(shell make --no-print-directory -f Makefile.$(MKEXT) install)
+	$(shell make --no-print-directory -f Makefile.$(MKEXT) install 1>/dev/null)
 uninstall: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) uninstall
 status: distrotest
