@@ -1,7 +1,7 @@
 # +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Makefile Setup ---#
 default: install
-.PHONY: default help install uninstall status usertest distrotest
+.PHONY: default help install uninstall status distrotest
 # +++++ Environment checks ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Early Shells 
 DISTROTEST_DEBIAN 	:= $(shell lsb_release -is)
