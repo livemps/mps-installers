@@ -39,7 +39,13 @@ help:
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: distrotest
-	@echo $(shell make --no-print-directory -f Makefile.$(MKEXT) install 1>/dev/null 2>/dev/null ; echo $$?)
+	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) install \
+			1>/dev/null 2>/dev/null ; echo $$?) ; \
+			if [ $$RET -eq 0 ] ; then \
+				echo "Installed" ; \
+			else \
+				echo "Error" ; \
+			fi
 uninstall: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) uninstall
 status: distrotest
