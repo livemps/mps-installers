@@ -7,6 +7,31 @@ INST ?= vim
 define doJobs
 	for target in $(INST) ; do make -C $$target/ $(1) ; done
 endef
+# +++++ Environment checks ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Early Shells 
+DISTROTEST_DEBIAN := $(shell lsb_release -is)
+DISTROTEST_ARCH := $(shell lsb_release -is)
+DISTRO 		 	?=none
+# --- Check Distro (Auto)
+ifeq ($(DISTRO),Arch)
+	MKEXT :=arch
+else ifeq ($(DISTRO),Debian)
+	MKEXT :=debian
+else
+	ifeq ($(DISTROTEST_ARCH),Arch)
+		MKEXT :=arch
+	else ifeq ($(DISTROTEST_DEBIAN),Debian)
+		MKEXT :=debian
+	else
+		MKEXT :=none
+	endif
+endif
+# --- Test distro
+distrotest:
+	@echo "MKEXT: $(MKEXT)"
+ifeq ($(MKEXT),none)
+	$(error DISTRO not found and auto detection failed!)
+endif
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -32,3 +57,14 @@ uninstall:
 	$(call doJobs,$@)
 status:
 	$(call doJobs,$@)
+docker-clean: distrotest
+	-docker rmi mps-min-$(MKEXT)
+	-docker container rm mps-min-$(MKEXT)
+docker-build: distrotest docker-clean
+	docker build -t mps-min-$(MKEXT) . -f Dockerfile.$(MKEXT)
+	docker create --name mps-min-$(MKEXT) mps-min-$(MKEXT)
+docker-stop: distrotest
+	-docker container stop mps-min-$(MKEXT)
+docker-start: distrotest docker-stop docker-build
+	-docker container rm mps-min-$(MKEXT)
+	docker run -it --name mps-min-$(MKEXT) mps-min-$(MKEXT)	
