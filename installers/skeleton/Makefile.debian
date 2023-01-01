@@ -1,0 +1,29 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status prepare \
+			homedir-install homedir-uninstall \
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# +++++ Prepare +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+prepare:
+	sudo apt update --yes && sudo apt upgrade --yes
+# +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+install: prepare
+uninstall:
+status: 
+	@echo "Status vim"
