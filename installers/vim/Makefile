@@ -4,8 +4,9 @@ default: install
 .PHONY: default help install uninstall status usertest distrotest
 # +++++ Environment checks ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Early Shells 
-DISTROTEST_DEBIAN := $(shell lsb_release -is)
-DISTROTEST_ARCH := $(shell lsb_release -is)
+DISTROTEST_DEBIAN 	:= $(shell lsb_release -is)
+DISTROTEST_ARCH 	:= $(shell lsb_release -is)
+LOGFILE				:=error.log
 # --- Check Distro (Auto)
 ifeq ($(DISTROTEST_ARCH),Arch)
 	MKEXT :=arch
@@ -39,14 +40,32 @@ help:
 	@echo ""
 # # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: distrotest
+	@echo -n "Installing..."
 	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) install \
-			1>/dev/null 2>/dev/null ; echo $$?) ; \
-			if [ $$RET -eq 0 ] ; then \
-				echo "Installed" ; \
-			else \
-				echo "Error" ; \
-			fi
+			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
+		if [ $$RET -eq 0 ] ; then \
+			echo "Done!" ; \
+		else \
+			echo "Error!" ; \
+			cat $$LOGFILE ; \
+		fi
 uninstall: distrotest
-	@make --no-print-directory -f Makefile.$(MKEXT) uninstall
+	@echo -n "Removing..."
+	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) uninstall \
+			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
+		if [ $$RET -eq 0 ] ; then \
+			echo "Done!" ; \
+		else \
+			echo "Error!" ; \
+			cat $$LOGFILE ; \
+		fi
 status: distrotest
-	@make --no-print-directory -f Makefile.$(MKEXT) status
+	@echo -n "Status: "
+	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) status \
+			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
+		if [ $$RET -eq 0 ] ; then \
+			echo "OK!" ; \
+		else \
+			echo "Error!" ; \
+			cat $$LOGFILE ; \
+		fi
