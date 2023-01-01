@@ -1,8 +1,10 @@
 FROM livemps/mps-min-arch
-RUN mkdir -p /mps && cd /mps \
-    && git clone https://github.com/livemps/mps-installers \
-    && cd mps-installers && git config pull.ff only && git pull \
-    && cd installers && make INST="vim" install
 USER mps
 WORKDIR /home/mps
+RUN mkdir -p ~/mps/repo/github.com/mps/ && cd ~/mps/repo/github.com/mps/ \
+    && git clone https://github.com/livemps/mps-installers \
+    && cd mps-installers && git config pull.ff only && git pull 
+RUN cd ~/mps/repo/github.com/mps/mps-installers/installers \
+    && make INST="vim mpsfolders skeleton" install \
+    && make INST="vim mpsfolders skeleton" status
 ENTRYPOINT ["/bin/bash"]

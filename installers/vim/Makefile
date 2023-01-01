@@ -54,8 +54,8 @@ ifeq ($(MKEXT),none)
 endif
 # --- Default targets
 install: distrotest
-	$(call printTask,$@,"Installing $(NAME)...","Success","Error")
+	$(call printTask,$@,"Installing '$(NAME)'...","Success","Error")
 uninstall: distrotest
-	$(call printTask,$@,"Uninstalling $(NAME)...","Success","Error")
+	$(call printTask,$@,"Uninstalling '$(NAME)'...","Success","Error")
 status: distrotest
-	$(call printTask,$@,"Status $(NAME): ","OK","Error")
+	$(call printTask,$@,"Status '$(NAME)': ","OK","Error")
