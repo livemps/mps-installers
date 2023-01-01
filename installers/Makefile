@@ -3,9 +3,13 @@
 default: install
 .PHONY: default help install uninstall status usertest distrotest
 # --- MPS Setup ---#
-INST ?= vim
+INST ?= mpsfolders
 define doJobs
-	for target in $(INST) ; do make -C $$target/ $(1) ; done
+	@for target in $(INST) ; do \
+		echo "# --- $$target ---"  ; \
+		make -C $$target/ $(1) ; \
+		echo "# --- $$target ---" ; \
+	done
 endef
 # +++++ Environment checks ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Early Shells 
@@ -62,8 +66,8 @@ uninstall:
 status:
 	$(call doJobs,$@)
 docker-clean: distrotest
-	-docker rmi mps-min-$(MKEXT)
 	-docker container rm mps-min-$(MKEXT)
+	-docker rmi mps-min-$(MKEXT)
 docker-build: distrotest docker-clean
 	docker build -t mps-min-$(MKEXT) . -f Dockerfile.$(MKEXT)
 	docker create --name mps-min-$(MKEXT) mps-min-$(MKEXT)
