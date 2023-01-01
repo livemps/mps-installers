@@ -5,10 +5,10 @@ default: install
 # --- MPS Setup ---#
 INST ?= mpsfolders
 define doJobs
-	@for target in $(INST) ; do \
+	@for target in <$(INST)> ; do \
 		echo "# --- $$target ---"  ; \
 		make -C $$target/ $(1) ; \
-		echo "# --- $$target ---" ; \
+		echo "# --- </$$target> ---" ; \
 	done
 endef
 # +++++ Environment checks ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -39,7 +39,7 @@ endif
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
-	@echo "Usage (As root): "
+	@echo "Usage : "
 	@echo ""
 	@echo "  make [DISTRO=DISTRO] [INST=Components] TARGET"
 	@echo "      DISTRO:"
@@ -53,8 +53,9 @@ help:
 	@echo "         status     : Current status"
 	@echo ""
 	@echo "      COMPONENTS:"
-	@echo "         vim        : vim + neovim + config + plugins"
 	@echo "         mpsfolders : default dotfiles and home folders"
+	@echo "         skeleton   : template files"
+	@echo "         vim        : vim + neovim + config + plugins"
 	@echo ""
 	@echo "  Example: make DISTRO=debian INST="vim mpsfolders" install"
 	@echo ""
