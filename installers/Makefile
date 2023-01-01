@@ -5,8 +5,8 @@ default: install
 # --- MPS Setup ---#
 INST ?= mpsfolders
 define doJobs
-	echo "# --- < $(1) > ---"  ; \
-	@for target in $(INST) ; do \
+	@echo "# --- < $(1) > ---"  ; \
+	for target in $(INST) ; do \
 		make --no-print-directory -C $$target/ $(1) ; \
 	done ; \
 	echo "# --- </ $(1) > ---" ;
