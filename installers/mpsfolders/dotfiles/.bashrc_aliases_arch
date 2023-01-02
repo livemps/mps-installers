@@ -1,5 +1,5 @@
 # pacman
-alias ps='pacman -Q'
+alias pq='pacman -Q'
 alias pi='sudo pacman -S'
 alias puu='sudo pacman -Syy && sudo pacman -Syu'
 alias cmmi='./configure && make && sudo make install'
