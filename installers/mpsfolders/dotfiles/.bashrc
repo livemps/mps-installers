@@ -9,7 +9,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 # Construct color prompt
-source .bashrc_colors
+. ~/.bashrc_colors
 PS1="\
 \$(RET=\$? ; if [[ \$RET -gt 0 ]]; then\
     printf \"\\${CPref}\\${BIRed}\\${CSuf}[\$RET]\"; else \
@@ -41,11 +41,11 @@ HISTCONTROL=ignoreboth 		# don't put duplicate lines in the history.
 shopt -s histappend 		# append to the history file, don't overwrite it
 shopt -s checkwinsize 		# update the values of LINES and COLUMNS.
 #--- Aliases ------------------------------------------------------------------
-source .bashrc_aliases_common
+. ~/.bashrc_aliases_common
 if [ "$(lsb_release -is)" = "Arch" ] ; then
-    source .bashrc_aliases_arch
+    . ~/.bashrc_aliases_arch
 elif [ "$(lsb_release -is)" = "Debian" ] ; then
-    source .bashrc_aliases_debian
+    . ~/.bashrc_aliases_debian
 fi
 #--- Bash completion ----------------------------------------------------------
 if ! shopt -oq posix; then
