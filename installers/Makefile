@@ -9,7 +9,7 @@ define doJobs
 	for target in $(INST) ; do \
 		echo "# ---- < $$target > ---"  ; \
 		make --no-print-directory -C $$target/ $(1) ; \
-		echo "# ---- </ $$target > ---" ;
+		echo "# ---- </ $$target > ---" ; \
 	done ; \
 	echo "# --- </ $(1) > ---" ;
 endef
