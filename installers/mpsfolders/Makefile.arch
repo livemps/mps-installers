@@ -28,6 +28,7 @@ help:
 bash:
 	@cp dotfiles/.bashrc* ~
 ~/.ssh/id_rsa:
+	@echo "Yes" | sudo pacman --noconfirm -S core/openssh
 	@echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 1>/dev/null
 folders: 
 	@for mpsdir in $(FOLDERS) ; do \
