@@ -24,10 +24,10 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 bash:
-	@cp dotfiles/.bashrc ~/.bashrc
+	@cp dotfiles/.bashrc* ~
 ~/.ssh/id_rsa:
-	echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 
-folders: archives transport osutils fonts dotfiles $(MPS_ROOT)/snippets ~/.ssh/id_rsa.pub
+	@echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 1>/dev/null
+folders: 
 	@for mpsdir in $(FOLDERS) ; do \
 		mkdir -p $(MPS_ROOT)/$$mpsdir ; \
 	done ;

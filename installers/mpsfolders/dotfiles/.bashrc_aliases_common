@@ -1,0 +1,40 @@
+# ls
+alias ll='ls -lah --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
+# git
+alias gs='git status'
+alias gl='git log'
+alias gd='git diff'
+alias ga='git add'
+alias gaa='git add -A'
+alias gac='git add -A ; git commit -m '
+alias gc='git commit -m'
+alias gpull='git pull'
+alias gpush='git push'
+# Docker
+alias dps="docker ps"
+alias di="docker images"
+# network
+alias ns='sudo netstat -tulpano'
+alias v='nvim'
+# mps
+alias repo="cd ~/mps/repo"
+alias disks="cd ~/mps/disks"
+alias docs="cd ~/mps/docs"
+alias scratch="cd ~/mps/scratch"
+alias snippets="cd ~/mps/snippets"
+alias vm="cd ~/mps/vm"
+alias wsp="cd ~/mps/wsp"
+# More fancy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+ 
+

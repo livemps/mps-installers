@@ -1,0 +1,5 @@
+# apt
+alias ps='apt search'
+alias pi='sudo apt install'
+alias puu='sudo apt update && sudo apt upgrade'
+alias cmmi='./configure && make && sudo make install'

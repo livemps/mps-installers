@@ -11,8 +11,8 @@ NAME				:= $(shell basename $$PWD)
 # --- Logging
 define printTask
 	@echo -n $(2)
-	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) $(1) \
-			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
+	@RET=$(shell sh -c "make --no-print-directory -f Makefile.$(MKEXT) $(1) \
+			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?") ; \
 		if [ $$RET -eq 0 ] ; then \
 			echo $(3) ; \
 		else \
