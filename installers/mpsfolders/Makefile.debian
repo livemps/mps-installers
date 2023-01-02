@@ -45,8 +45,8 @@ snippets:
 	cp snippets/* $(MPS_ROOT)/snippets
 	chmod a+x $(MPS_ROOT)/snippets/*
 install: bash  ~/.ssh/id_rsa folders symlinks snippets
-
+	@sudo apt install neofetch
 uninstall:
-	@echo "Uninstall Skeleton"
+	@sudo apt remove neofetch
 status: 
 	@echo "Status"
