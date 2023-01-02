@@ -4,8 +4,8 @@
 #### CONF VARIABLES ############################################################
 set $mod Mod4
 set $term=xterm-kitty
-set $Mon1 Virtual1
-set $Mon2 Virtual1
+set $Mon1 Virtual-1
+set $Mon2 Virtual-1
 #set $Mon1 DP-2
 #set $Mon2 HDMI-0
 # Workspace names
@@ -173,12 +173,12 @@ mode "$mode_launcher" {
         bindsym $mod+z mode "default"
 }
 #### SCREEN ####################################################################
+# Resolution mainframe
+#exec xrandr --output $Mon1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+#                --output $Mon2 --mode 1920x1080 --pos 1920x0 --rotate normal
+exec_always xrandr --output $Mon1 --mode 1680x1050
 # Background
 exec_always feh --bg-scale ~/.config/images/wallpaper.jpg
-# Resolution mainframe
-#exec xrandr --output DP-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
-#                --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal
-exec xrandr --output Virtual1 --mode 1680x1050
 #### BARS Mon1 #################################################################
 bar {
         font pango:FontAwesome 7
