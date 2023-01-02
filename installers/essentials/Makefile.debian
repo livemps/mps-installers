@@ -30,8 +30,8 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@sudo apt install $(MPS_ALL) --yes
+	@sudo DEBIAN_FRONTEND=noninteractive apt install $(MPS_ALL) --yes
 uninstall:
-	@sudo apt remove $(MPS_ALL) --yes
+	@sudo DEBIAN_FRONTEND=noninteractive apt remove $(MPS_ALL) --yes
 status: 
 	@echo "Unknown"
