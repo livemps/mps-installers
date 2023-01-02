@@ -47,9 +47,9 @@ snippets:
 	cp snippets/* $(MPS_ROOT)/snippets
 	chmod a+x $(MPS_ROOT)/snippets/*
 neofetch:
-	@sudo apt install neofetch
+	@sudo apt install neofetch --yes
 install: neofetch bash ~/.ssh/id_rsa folders symlinks snippets
 uninstall:
-	@sudo apt remove neofetch
+	@sudo apt remove neofetch --yes
 status: 
 	@echo "Status"
