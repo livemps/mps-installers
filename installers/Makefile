@@ -80,7 +80,7 @@ docker-clean: distrotest
 	-docker rmi $(docker images -a -f 'dangling=true' -q)
 	-docker rmi mps-min-$(MKEXT)
 docker-build: distrotest docker-clean
-	docker build -t mps-min-$(MKEXT) . -f Dockerfile.$(MKEXT)
+	docker build --force-rm -t mps-min-$(MKEXT) . -f Dockerfile.$(MKEXT)
 	docker create --name mps-min-$(MKEXT) mps-min-$(MKEXT)
 docker-stop: distrotest
 	-docker container stop mps-min-$(MKEXT)
