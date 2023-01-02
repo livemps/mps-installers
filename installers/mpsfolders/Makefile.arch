@@ -6,6 +6,7 @@ default: install
 			neofetch 
 # --- Installers Setup ---#
 MPS_ROOT 			:=~/mps
+MPS_ROOT_DISKS		:=/media/disks
 FOLDERS             := scratch repo tools vm disks docs wsp
 SYMLINKS            :=
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -33,7 +34,7 @@ folders:
 		mkdir -p $(MPS_ROOT)/$$mpsdir ; \
 	done ;
 symlinks: $(MPS_ROOT)
-	@if [ ! "$(SYMLINKS)" == "" ] ; then \
+	@if [ ! "$(SYMLINKS)" = "" ] ; then \
 		cd $(MPS_ROOT)/disks/ ; \
 		for drives in $(SYMLINKS) ; do \
 			rm $(MPS_ROOT)/disks/$$drives ; \
