@@ -15,6 +15,8 @@ MPS_NETWORK     := net-tools iptables tcpdump iw ssh nmap netcat dnsutils
 MPS_ALL			:= $(MPS_ESSENTIALS) $(MPS_TRANSPORT) \
 					$(MPS_ARCHIVES) $(MPS_BASHUTILS) \
 					$(MPS_BUILD) $(MPS_NETWORK)  
+AUR_ARCHIVES	:= dtrx
+AUR_ALL   		:= $(AUR_ARCHIVES)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -33,7 +35,9 @@ help:
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
 	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_ALL)
+	@echo "Yes" | sudo yay --noconfirm -S $(AUR_ALL)
 uninstall:
 	@echo "Yes" | sudo pacman --noconfirm -R $(MPS_ALL)
+	@echo "Yes" | sudo yay --noconfirm -R $(AUR_ALL)
 status: 
 	@echo "Unknown"
