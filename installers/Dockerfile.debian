@@ -4,5 +4,5 @@ WORKDIR /home/mps
 ARG DEBIAN_FRONTEND=noninteractive
 RUN cd ~/mps/repo/github.com/mps/mps-installers/installers \
     && git pull \
-    && make INST="mpsfolders" install
+    && make INST="mpsfolders essentials fonts" install
 ENTRYPOINT ["/bin/bash"]

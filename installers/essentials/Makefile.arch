@@ -7,7 +7,7 @@ default: install
 MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree \
 				   extra/fontconfig python
 MPS_TRANSPORT	:= ca-certificates curl extra/wget gnupg 
-MPS_ARCHIVES	:= zip unzip bzip2
+MPS_ARCHIVES	:= extra/zip extra/unzip core/bzip2
 MPS_BASHUTILS   := cowsay fortune fortunes-de fortunes-off cmatrix \
 				   console-setup
 MPS_BUILD       := gcc gdb build-essential
