@@ -49,7 +49,8 @@ install:
 	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/variantcode string "
 	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/variant select German"
 	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/xkb-keymap select "
-	@export DEBIAN_FRONTEND=noninteractive ; sudo apt --yes install $(MPS_ALL)
+	@export DEBIAN_FRONTEND=noninteractive 
+	@sudo apt --yes install $(MPS_ALL)
 uninstall:
 	@export DEBIAN_FRONTEND=noninteractive ; sudo apt --yes remove $(MPS_ALL)
 status: 
