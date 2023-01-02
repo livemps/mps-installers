@@ -10,7 +10,7 @@ MPS_TRANSPORT	:= ca-certificates curl extra/wget gnupg
 MPS_ARCHIVES	:= extra/zip extra/unzip core/bzip2
 MPS_BASHUTILS   := cowsay fortune-mod cmatrix
 MPS_BUILD       := gcc gdb base-devel
-MPS_NETWORK     := net-tools iptables tcpdump iw ssh nmap netcat dnsutils
+MPS_NETWORK     := net-tools iptables tcpdump iw core/openssh nmap netcat dnsutils
 MPS_ALL			:= $(MPS_ESSENTIALS) $(MPS_TRANSPORT) \
 					$(MPS_ARCHIVES) $(MPS_BASHUTILS) \
 					$(MPS_BUILD) $(MPS_NETWORK)  
