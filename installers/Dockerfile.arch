@@ -3,6 +3,5 @@ USER mps
 WORKDIR /home/mps
 RUN cd ~/mps/repo/github.com/mps/mps-installers/installers \
     && git pull \
-    && make INST="mpsfolders" install \
-    && make INST="mpsfolders" status
+    && make INST="mpsfolders essentials" install 
 ENTRYPOINT ["/bin/bash"]
