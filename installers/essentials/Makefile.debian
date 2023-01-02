@@ -4,7 +4,8 @@
 default: install
 .PHONY: default help install uninstall status
 # --- Installers Setup ---#
-MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree fontconfig python3
+MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree fontconfig \
+				   	debconf debconf-utils python3
 MPS_TRANSPORT	:= ca-certificates curl wget gnupg 
 MPS_ARCHIVES	:= zip unzip bzip2
 MPS_BASHUTILS   := cowsay fortune fortunes-de fortunes-off cmatrix console-setup
@@ -30,7 +31,7 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@sudo DEBIAN_FRONTEND='noninteractive' --yes apt install $(MPS_BASHUTILS)
+	@sudo DEBIAN_FRONTEND='noninteractive' --yes apt install $(MPS_ESSENTIALS)
 	@sudo DEBIAN_FRONTEND='noninteractive' --yes apt install $(MPS_ALL)
 uninstall:
 	@sudo DEBIAN_FRONTEND='noninteractive' --yes apt remove $(MPS_ALL)
