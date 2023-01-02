@@ -39,6 +39,8 @@ config:
 # --- Default Targets -------------------------------------------------------------
 install: config
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes install $(MPS_ALL)
+	@pip install bumblebee-status
+	@update-alternatives --set x-terminal-emulator /usr/bin/kitty
 uninstall:
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes remove $(MPS_ALL)
 status: 
