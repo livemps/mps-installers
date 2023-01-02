@@ -2,7 +2,11 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status
+.PHONY: default help install uninstall status bash
+# --- Installers Setup ---#
+MPS_ROOT 			:=~/mps
+FOLDERS             := scratch repo tools vm disks docs wsp
+SYMLINKS            :=
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -19,8 +23,29 @@ help:
 	@echo "  Example: make install"
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install:
-	@echo "Install Skeleton"
+bash:
+	@cp dotfiles/.bashrc ~/.bashrc
+~/.ssh/id_rsa:
+	echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 
+folders: archives transport osutils fonts dotfiles $(MPS_ROOT)/snippets ~/.ssh/id_rsa.pub
+	@for mpsdir in $(FOLDERS) ; do \
+		mkdir -p $(MPS_ROOT)/$$mpsdir ; \
+	done ;
+symlinks: $(MPS_ROOT)
+	@if [ ! "$(SYMLINKS)" == "" ] ; then \
+		cd $(MPS_ROOT)/disks/ ; \
+		for drives in $(SYMLINKS) ; do \
+			rm $(MPS_ROOT)/disks/$$drives ; \
+			ln -s $(MPS_ROOT_DISKS)/$$drives ; \
+		done ; \
+		cd - ; \
+	fi
+snippets:
+	-mkdir -p $(MPS_ROOT)/snippets
+	cp snippets/* $(MPS_ROOT)/snippets
+	chmod a+x $(MPS_ROOT)/snippets/*
+install: bash  ~/.ssh/id_rsa folders symlinks snippets
+
 uninstall:
 	@echo "Uninstall Skeleton"
 status: 
