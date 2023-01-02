@@ -2,11 +2,17 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status bash folders symlinks snippets \
-			neofetch
+.PHONY: default help install uninstall status
 # --- Installers Setup ---#
-MPS_ESSENTIALS := lsb-release psmisc psutils htop git tree fontconfig \
-				  	ca-certificates curl wget gnupg
+MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree fontconfig python3
+MPS_TRANSPORT	:= ca-certificates curl wget gnupg 
+MPS_ARCHIVES	:= zip unzip bzip2
+MPS_BASHUTILS   := cowsay fortune fortunes-de fortunes-off cmatrix console-setup
+MPS_BUILD       := gcc gdb build-essential
+MPS_NETWORK     := net-tools iptables tcpdump iw ssh nmap netcat dnsutils
+MPS_ALL			:= $(MPS_ESSENTIALS) $(MPS_TRANSPORT) \
+					$(MPS_ARCHIVES) $(MPS_BASHUTILS) \
+					$(MPS_BUILD) $(MPS_NETWORK)  
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -24,8 +30,8 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@sudo apt install $(MPS_ESSENTIALS) --yes
+	@sudo apt install $(MPS_ALL) --yes
 uninstall:
-	@sudo apt remove $(MPS_ESSENTIALS) --yes
+	@sudo apt remove $(MPS_ALL) --yes
 status: 
-	@echo "Status"
+	@echo "Unknown"

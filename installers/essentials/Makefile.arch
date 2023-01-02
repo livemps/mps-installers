@@ -5,9 +5,17 @@ default: install
 .PHONY: default help install uninstall status bash folder symlinks snippets \
 			neofetch 
 # --- Installers Setup ---#
-MPS_ESSENTIALS            := lsb-release git htop psmisc psutils tree \
-								extra/fontconfig curl extra/wget gnupg \
-								ca-certificates
+MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree \
+				   extra/fontconfig python
+MPS_TRANSPORT	:= ca-certificates curl extra/wget gnupg 
+MPS_ARCHIVES	:= zip unzip bzip2
+MPS_BASHUTILS   := cowsay fortune fortunes-de fortunes-off cmatrix \
+				   console-setup
+MPS_BUILD       := gcc gdb build-essential
+MPS_NETWORK     := net-tools iptables tcpdump iw ssh nmap netcat dnsutils
+MPS_ALL			:= $(MPS_ESSENTIALS) $(MPS_TRANSPORT) \
+					$(MPS_ARCHIVES) $(MPS_BASHUTILS) \
+					$(MPS_BUILD) $(MPS_NETWORK)  
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -25,8 +33,8 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_ESSENTIALS)
+	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_ALL)
 uninstall:
-	@echo "Yes" | sudo pacman --noconfirm -R $(MPS_ESSENTIALS)
+	@echo "Yes" | sudo pacman --noconfirm -R $(MPS_ALL)
 status: 
-	@echo "Status"
+	@echo "Unknown"
