@@ -30,8 +30,9 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@sudo DEBIAN_FRONTEND=noninteractive apt install $(MPS_ALL) --yes
+	@sudo DEBIAN_FRONTEND='noninteractive' --yes apt install $(MPS_BASHUTILS)
+	@sudo DEBIAN_FRONTEND='noninteractive' --yes apt install $(MPS_ALL)
 uninstall:
-	@sudo DEBIAN_FRONTEND=noninteractive apt remove $(MPS_ALL) --yes
+	@sudo DEBIAN_FRONTEND='noninteractive' --yes apt remove $(MPS_ALL)
 status: 
 	@echo "Unknown"
