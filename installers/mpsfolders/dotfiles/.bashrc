@@ -8,9 +8,8 @@ esac
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
-source .bashrc_colors
-
 # Construct color prompt
+source .bashrc_colors
 PS1="\
 \$(RET=\$? ; if [[ \$RET -gt 0 ]]; then\
     printf \"\\${CPref}\\${BIRed}\\${CSuf}[\$RET]\"; else \
@@ -43,8 +42,11 @@ shopt -s histappend 		# append to the history file, don't overwrite it
 shopt -s checkwinsize 		# update the values of LINES and COLUMNS.
 #--- Aliases ------------------------------------------------------------------
 source .bashrc_aliases_common
-source .bashrc_aliases_debian
-#source .bashrc_aliases_arch
+if [ "$(lsb_release -is)" = "Arch" ] ; then
+    source .bashrc_aliases_arch
+elif [ "$(lsb_release -is)" = "Debian" ] ; then
+    source .bashrc_aliases_debian
+fi
 #--- Bash completion ----------------------------------------------------------
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
