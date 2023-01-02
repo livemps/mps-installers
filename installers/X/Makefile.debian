@@ -5,6 +5,10 @@ default: install
 .PHONY: default help install uninstall status
 # --- Installers Setup ---#
 MPS_X           := xorg xserver-xorg-video-nouveau xserver-xorg-video-vesa
+MPS_OGL         := mesa-utils libglu1-mesa-dev freeglut3-dev \
+						mesa-common-dev libglew-dev libglfw3-dev \
+						libglm-dev libao-dev libmpg123-dev
+MPS_ALL			:= $(MPS_X) $(MPS_OGL)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -22,8 +26,8 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes install $(MPS_X)
+	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes install $(MPS_ALL)
 uninstall:
-	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes remove $(MPS_X)
+	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes remove $(MPS_ALL)
 status: 
 	@echo "Unknown"

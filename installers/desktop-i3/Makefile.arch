@@ -1,0 +1,56 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status
+# --- Installers Setup ---#
+FONTS_URL_AWESOME   :=https://use.fontawesome.com/releases/v6.2.1/fontawesome-free-6.2.1-desktop.zip
+FONTS_URL_JETBRAINS :=https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip  
+FONTS_URL_MONOID    :=https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/Monoid.zip
+FONTS_FILE_AWESOME 	:=fonts/Awesome/Font\ Awesome\ 6\ Free-Regular-400.otf 
+FONTS_FILE_MONOID   :=fonts/Monoid/Monoid\ Regular\ Nerd\ Font\ Complete.ttf
+FONTS_FILE_JETBRAINS:=fonts/JetBrainsMono/JetBrains\ Mono\ Regular\ Nerd\ Font\ Complete.ttf
+FONTS_PACKAGES		:=ttf-awesome
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# --- Fonts Download ------------------------------------------------------------
+$(FONTS_FILE_AWESOME):
+	-mkdir -p ./fonts
+	wget $(FONTS_URL_AWESOME) -O ./fonts/Awesome.zip
+	unzip ./fonts/Awesome.zip -d ./fonts/Awesome/
+	cp ./fonts/Awesome/fontawesome-free-6.2.1-desktop/otfs/*.otf ./fonts/Awesome/
+	rm -rf ./fonts/Awesome.zip 
+	rm -rf ./fonts/Awesome/fontawesome-free-6.2.1-desktop/
+$(FONTS_FILE_MONOID):
+	-mkdir -p ./fonts
+	wget $(FONTS_URL_MONOID) -O ./fonts/Monoid.zip
+	unzip ./fonts/Monoid.zip -d ./fonts/Monoid
+	rm -rf ./fonts/Monoid.zip
+$(FONTS_FILE_JETBRAINS):
+	-mkdir -p ./fonts
+	wget $(FONTS_URL_JETBRAINS)  -O ./fonts/JetBrainsMono.zip
+	unzip ./fonts/JetBrainsMono.zip -d ./fonts/JetBrainsMono
+	rm -rf ./fonts/JetBrainsMono.zip
+# --- Default Targets -------------------------------------------------------------
+install: $(FONTS_FILE_AWESOME) $(FONTS_FILE_JETBRAINS) $(FONTS_FILE_MONOID)
+	@export DEBIAN_FRONTEND=noninteractive ; echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_FONTS_PACKAGES)
+	-mkdir -p ~/.local/share/fonts
+	cp -r fonts/* ~/.local/share/fonts
+	fc-cache -f -v
+uninstall:
+	@export DEBIAN_FRONTEND=noninteractive ; echo "Yes" | sudo -E pacman --noconfirm -R $(MPS_FONTS_PACKAGES)
+status: 
+	@echo "Unknown"
