@@ -1,0 +1,32 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status bash folder symlinks snippets \
+			neofetch 
+# --- Installers Setup ---#
+MPS_ESSENTIALS            := lsb-release git htop psmisc psutils tree \
+								extra/fontconfig curl extra/wget gnupg \
+								ca-certificates
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+install: 
+	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_ESSENTIALS)
+uninstall:
+	@echo "Yes" | sudo pacman --noconfirm -R $(MPS_ESSENTIALS)
+status: 
+	@echo "Status"
