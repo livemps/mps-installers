@@ -2,7 +2,8 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status bash
+.PHONY: default help install uninstall status bash folder symlinks snippets \
+			neofetch 
 # --- Installers Setup ---#
 MPS_ROOT 			:=~/mps
 FOLDERS             := scratch repo tools vm disks docs wsp
@@ -44,9 +45,10 @@ snippets:
 	-mkdir -p $(MPS_ROOT)/snippets
 	cp snippets/* $(MPS_ROOT)/snippets
 	chmod a+x $(MPS_ROOT)/snippets/*
-install: bash  ~/.ssh/id_rsa folders symlinks snippets
-	@echo "Yes" | sudo pacman --noconfirm -R community/neofetch
+neofetch:
+	@echo "Yes" | sudo pacman --noconfirm -S community/neofetch
+install: neofetch bash  ~/.ssh/id_rsa folders symlinks snippets
 uninstall:
-	@sudo apt remove neofetch
+	@echo "Yes" | sudo pacman --noconfirm -R community/neofetch
 status: 
 	@echo "Status"
