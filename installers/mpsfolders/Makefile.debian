@@ -2,7 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status bash keyboard folders symlinks \
+.PHONY: default help install uninstall status bash folders symlinks \
 			snippets neofetch
 # --- Installers Setup ---#
 MPS_ROOT 			:=~/mps
@@ -27,9 +27,6 @@ help:
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 bash:
 	@cp dotfiles/.bashrc* ~
-keyboard:
-	#@sudo cp dotfiles/keyboard /etc/default/keyboard
-	#@sudo cp dotfiles/console-setup /etc/default/console-setup
 ~/.ssh/id_rsa:
 	@echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 1>/dev/null
 folders: 

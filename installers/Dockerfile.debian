@@ -5,9 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN mkdir -p ~/mps/repo/github.com/mps/ && cd ~/mps/repo/github.com/mps/ \
     && git clone https://github.com/livemps/mps-installers \
     && cd mps-installers && git config pull.ff only && git pull 
-#RUN DEBIAN_FRONTEND=noninteractive ; sudo apt-get install -y -q xterm 
-#RUN DEBIAN_FRONTEND=noninteractive ; sudo apt-get install -y -q console-setup 
 RUN cd ~/mps/repo/github.com/mps/mps-installers/installers \
-    && make INST="mpsfolders vim" install \
-    && make INST="mpsfolders essentials vim" status
+    && make INST="essentials mpsfolders vim" install \
+    && make INST="essentials mpsfolders vim" status
 ENTRYPOINT ["/bin/bash"]

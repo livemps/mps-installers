@@ -2,7 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status bash keyboard folder symlinks \
+.PHONY: default help install uninstall status bash folder symlinks \
 			snippets neofetch 
 # --- Installers Setup ---#
 MPS_ROOT 			:=~/mps
@@ -27,8 +27,6 @@ help:
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 bash:
 	@cp dotfiles/.bashrc* ~
-keyboard:
-	@cp dotfiles/keyboard /etc/default/keyboard
 ~/.ssh/id_rsa:
 	@echo "Yes" | sudo pacman --noconfirm -S core/openssh
 	@echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 1>/dev/null
@@ -51,7 +49,7 @@ snippets:
 	chmod a+x $(MPS_ROOT)/snippets/*
 neofetch:
 	@echo "Yes" | sudo pacman --noconfirm -S community/neofetch
-install: neofetch keyboard bash  ~/.ssh/id_rsa folders symlinks snippets
+install: neofetch bash  ~/.ssh/id_rsa folders symlinks snippets
 uninstall:
 	@echo "Yes" | sudo pacman --noconfirm -R community/neofetch
 status: 
