@@ -2,8 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status bash folder symlinks snippets \
-			neofetch 
+.PHONY: default help install uninstall status 
 # --- Installers Setup ---#
 MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree \
 				   extra/fontconfig python

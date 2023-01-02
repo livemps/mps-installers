@@ -2,10 +2,8 @@ FROM livemps/mps-min-debian
 USER mps
 WORKDIR /home/mps
 ARG DEBIAN_FRONTEND=noninteractive
-RUN mkdir -p ~/mps/repo/github.com/mps/ && cd ~/mps/repo/github.com/mps/ \
-    && git clone https://github.com/livemps/mps-installers \
-    && cd mps-installers && git config pull.ff only && git pull 
 RUN cd ~/mps/repo/github.com/mps/mps-installers/installers \
-    && make INST="essentials mpsfolders vim" install \
-    && make INST="essentials mpsfolders vim" status
+    && git pull \
+    && make INST="mpsfolders" install \
+    && make INST="mpsfolders" status
 ENTRYPOINT ["/bin/bash"]

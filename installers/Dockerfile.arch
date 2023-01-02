@@ -1,10 +1,8 @@
 FROM livemps/mps-min-arch
 USER mps
 WORKDIR /home/mps
-RUN mkdir -p ~/mps/repo/github.com/mps/ && cd ~/mps/repo/github.com/mps/ \
-    && git clone https://github.com/livemps/mps-installers \
-    && cd mps-installers && git config pull.ff only && git pull 
 RUN cd ~/mps/repo/github.com/mps/mps-installers/installers \
-    && make INST="essentials vim mpsfolders" install \
-    && make INST="essentials vim mpsfolders" status
+    && git pull \
+    && make INST="mpsfolders" install \
+    && make INST="mpsfolders" status
 ENTRYPOINT ["/bin/bash"]

@@ -48,7 +48,7 @@ snippets:
 	chmod a+x $(MPS_ROOT)/snippets/*
 neofetch:
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt install neofetch --yes
-install: neofetch bash keyboard ~/.ssh/id_rsa folders symlinks snippets
+install: neofetch bash ~/.ssh/id_rsa folders symlinks snippets
 uninstall:
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt remove neofetch --yes
 status: 
