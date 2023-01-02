@@ -31,7 +31,24 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@export DEBIAN_FRONTEND='noninteractive' ; sudo apt --yes install $(MPS_ESSENTIALS)
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/altgr select The default for the keyboard layout"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/compose select No compose key"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/ctrl_alt_bksp boolean false"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/layoutcode string de"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/layout select German"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/modelcode string pc105"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/model select Generic 105-key (Intl) PC"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/optionscode string "
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/store_defaults_in_debconf_db boolean true"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/switch select No temporary switch"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/toggle select No toggling"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/unsupported_config_layout boolean true"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/unsupported_config_options boolean true"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/unsupported_layout boolean true"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/unsupported_options boolean true"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/variantcode string "
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/variant select German"
+	@sudo debconf-set-selections <<< "keyboard-configuration keyboard-configuration/xkb-keymap select "
 	@export DEBIAN_FRONTEND='noninteractive' ; sudo apt --yes install $(MPS_ALL)
 uninstall:
 	@export DEBIAN_FRONTEND='noninteractive' ; sudo apt --yes remove $(MPS_ALL)
