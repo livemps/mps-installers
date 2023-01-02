@@ -6,20 +6,7 @@ default: install
 # --- Early Shells 
 DISTROTEST_DEBIAN 	:= $(shell lsb_release -is)
 DISTROTEST_ARCH 	:= $(shell lsb_release -is)
-LOGFILE				:=error.log
 NAME				:= $(shell basename $$PWD)
-# --- Logging
-define printTask
-	@echo -n $(2)
-	@RET=$(shell make --no-print-directory -f Makefile.$(MKEXT) $(1) \
-			1>$(LOGFILE) 2>$(LOGFILE) ; echo $$?) ; \
-		if [ $$RET -eq 0 ] ; then \
-			echo $(3) ; \
-		else \
-			echo $(4) ; \
-			cat $(LOGFILE) ; \
-		fi
-endef
 # --- Check Distro (Auto)
 ifeq ($(DISTROTEST_ARCH),Arch)
 	MKEXT :=arch
@@ -54,8 +41,8 @@ ifeq ($(MKEXT),none)
 endif
 # --- Default targets
 install: distrotest
-	$(call printTask,$@,"Installing '$(NAME)'...","Success","Error")
+	@make --no-print-directory -f Makefile.$(MKEXT) $@
 uninstall: distrotest
-	$(call printTask,$@,"Uninstalling '$(NAME)'...","Success","Error")
+	@make --no-print-directory -f Makefile.$(MKEXT) $@
 status: distrotest
-	$(call printTask,$@,"Status '$(NAME)': ","OK","Error")
+	@make --no-print-directory -f Makefile.$(MKEXT) $@
