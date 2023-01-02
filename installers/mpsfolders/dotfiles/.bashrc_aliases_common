@@ -13,8 +13,9 @@ alias gc='git commit -m'
 alias gpull='git pull'
 alias gpush='git push'
 # Docker
-alias dps="docker ps"
-alias di="docker images"
+alias dps="docker ps -a"
+alias drm="docker container rm"
+alias dia="docker images -a"
 # network
 alias ns='sudo netstat -tulpano'
 alias v='nvim'
