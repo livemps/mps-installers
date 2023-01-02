@@ -35,9 +35,9 @@ help:
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
 	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_ALL)
-	@echo "Yes" | sudo yay --noconfirm -S $(AUR_ALL)
+	@echo "Yes" | yay --noconfirm -S $(AUR_ALL)
 uninstall:
 	@echo "Yes" | sudo pacman --noconfirm -R $(MPS_ALL)
-	@echo "Yes" | sudo yay --noconfirm -R $(AUR_ALL)
+	@echo "Yes" | yay --noconfirm -R $(AUR_ALL)
 status: 
 	@echo "Unknown"
