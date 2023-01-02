@@ -31,9 +31,9 @@ help:
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: 
-	@sudo export DEBIAN_FRONTEND='noninteractive' --yes apt install $(MPS_ESSENTIALS)
-	@sudo export DEBIAN_FRONTEND='noninteractive' --yes apt install $(MPS_ALL)
+	@export DEBIAN_FRONTEND='noninteractive' ; sudo apt --yes install $(MPS_ESSENTIALS)
+	@export DEBIAN_FRONTEND='noninteractive' ; sudo apt --yes install $(MPS_ALL)
 uninstall:
-	@sudo export DEBIAN_FRONTEND='noninteractive' --yes apt remove $(MPS_ALL)
+	@export DEBIAN_FRONTEND='noninteractive' ; sudo apt --yes remove $(MPS_ALL)
 status: 
 	@echo "Unknown"
