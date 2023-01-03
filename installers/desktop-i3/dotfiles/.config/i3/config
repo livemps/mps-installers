@@ -3,12 +3,19 @@
 ################################################################################
 #### CONF VARIABLES ############################################################
 set $mod Mod4
-set $term xterm-kitty
-set $Mon1 Virtual1
-set $Mon2 Virtual1
+set $term kitty
+# Virtualbox (Bare-Metal)
 #set $Mon1 DP-2
 #set $Mon2 HDMI-0
-set $Resolution 1920x1080
+#set $Resolution 1920x1080
+# Virtualbox (Arch)
+#set $Mon1 Virtual1
+#set $Mon2 Virtual1
+#set $Resolution 1680x1050
+# Virtualbox (Debian)
+set $Mon1 Virtual-1
+set $Mon2 Virtual-1
+set $Resolution 1680x1050
 # Workspace names
 set $ws1   "1:💻"
 set $ws2   "2:🔨"
@@ -148,7 +155,7 @@ bindsym $mod+Shift+v split h
 # split in vertical orientation
 bindsym $mod+v split v
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec $term
 # Applications
 bindsym Mod1+F1 exec i3-msg workspace $ws3 && firefox
 bindsym Mod1+F2 exec i3-msg workspace $ws7 && thunderbird

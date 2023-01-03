@@ -7,7 +7,7 @@ default: install
 MPS_GUI_ESSENTIALS  := galculator numlockx arandr lxappearance psutils iw xcwd
 MPS_GUI_WMTOOLS		:= rofi feh lightdm compton
 MPS_GUI_TERMINAL    := kitty
-MPS_GUI_SOUND       := pulseaudio pavucontrol volumeicon
+MPS_GUI_SOUND       := pulseaudio pavucontrol volumeicon-alsa
 MPS_DSK_X           := xbacklight
 MPS_GUI_ICONS       := lxde-icon-theme gnome-extra-icons
 MPS_DSK_GNOME_TOOLS := gnome-system-monitor \
