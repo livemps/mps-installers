@@ -5,9 +5,9 @@ default: install
 .PHONY: default help install uninstall status config
 # --- Installers Setup ---#
 MPS_GUI_ESSENTIALS  := galculator numlockx arandr
-MPS_GUI_TERMINAL    := kitty
+MPS_GUI_TERMINAL    := xterm kitty
 MPS_DSK_BUMBLEBEE   := psutils iw volumeicon tk progress dbus-python
-MPS_DSK_I3          := lightdm i3-gaps picom rofi feh \
+MPS_DSK_I3          := lightdm lightdm-gtk-greeter i3-gaps picom rofi feh \
 					   lxappearance pipewire-pulse pavucontrol
 MPS_DSK_NETWORK		:= networkmanager network-manager-applet
 MPS_DSK_GNOME_TOOLS := gnome-system-monitor gedit gedit-plugins
@@ -36,11 +36,12 @@ help:
 	@echo ""
 # --- Fonts Download ------------------------------------------------------------
 config:
-
+	cp -rT dotfiles/ ~
 # --- Default Targets -------------------------------------------------------------
 install: config
 	@echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)
 	@echo "Yes" | yay --noconfirm -S $(MPS_AUR_ALL)
+	@sudo systemctl enable lightdm.service
 uninstall:
 	@echo "Yes" | sudo -E pacman --noconfirm -R $(MPS_ALL)
 	@echo "Yes" | yay --noconfirm -R $(MPS_AUR_ALL)
