@@ -41,7 +41,10 @@ config:
 install: config
 	@echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)
 	@echo "Yes" | yay --noconfirm -S $(MPS_AUR_ALL)
+	@pip install bumblebee-status
 	@sudo systemctl enable lightdm.service
+	@sudo systemctl --type=service enable NetworkManager
+	@sudo systemctl start NetworkManager
 uninstall:
 	@echo "Yes" | sudo -E pacman --noconfirm -R $(MPS_ALL)
 	@echo "Yes" | yay --noconfirm -R $(MPS_AUR_ALL)

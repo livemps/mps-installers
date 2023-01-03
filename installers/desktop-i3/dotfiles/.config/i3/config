@@ -3,11 +3,12 @@
 ################################################################################
 #### CONF VARIABLES ############################################################
 set $mod Mod4
-set $term=xterm-kitty
-set $Mon1 Virtual-1
-set $Mon2 Virtual-1
+set $term xterm-kitty
+set $Mon1 Virtual1
+set $Mon2 Virtual1
 #set $Mon1 DP-2
 #set $Mon2 HDMI-0
+set $Resolution 1920x1080
 # Workspace names
 set $ws1   "1:💻"
 set $ws2   "2:🔨"
@@ -147,7 +148,7 @@ bindsym $mod+Shift+v split h
 # split in vertical orientation
 bindsym $mod+v split v
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec $term
 # Applications
 bindsym Mod1+F1 exec i3-msg workspace $ws3 && firefox
 bindsym Mod1+F2 exec i3-msg workspace $ws7 && thunderbird
@@ -173,12 +174,12 @@ mode "$mode_launcher" {
         bindsym $mod+z mode "default"
 }
 #### SCREEN ####################################################################
-# Resolution mainframe
-#exec xrandr --output $Mon1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
-#                --output $Mon2 --mode 1920x1080 --pos 1920x0 --rotate normal
-exec_always xrandr --output $Mon1 --mode 1680x1050
 # Background
 exec_always feh --bg-scale ~/.config/images/wallpaper.jpg
+# Resolution mainframe
+#exec xrandr --output $Mon1 --primary --mode $Resolution --pos 0x0 --rotate normal \
+#                --output $Mon2 --mode $Resolution --pos 1920x0 --rotate normal
+exec_always xrandr --output $Mon1 --mode $Resolution
 #### BARS Mon1 #################################################################
 bar {
         font pango:FontAwesome 7
@@ -206,7 +207,7 @@ bar {
         workspace_buttons yes
 	    status_command ~/.local/bin/bumblebee-status \
             -m disk:root disk:home \
-            -m apt arandr layout datetime \
+            -m arandr layout datetime \
             -p home.open="i3-msg workspace $ws2 ; exec thunar" -p home.path="/home/$USER" -p home.format="~: ({percent:05.02f}%)" \
             -p root.open="i3-msg workspace $ws2 ; exec thunar" -p root.path="/" -p root.format="/: ({percent:05.02f}%)" \
             -t iceberg
@@ -266,7 +267,7 @@ assign [class="Spotify"] $ws10
 exec --no-startup-id compton -b -f -D 5
 exec --no-startup-id setxkbmap de
 exec --no-startup-id xrdb ~.Xressources
-exec --no-startup-id xset r rate 350 50
+exec --no-startup-id xset r rate 250 50
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 # Workspace Defaults
@@ -278,5 +279,6 @@ exec --no-startup-id firefox-esr
 exec --no-startup-id i3-msg workspace $ws10 ; exec spotify
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id pnmixer
+#exec --no-startup-id pnmixer 
+exec --no-startup-id volumeicon 
 
