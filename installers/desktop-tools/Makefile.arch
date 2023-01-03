@@ -1,0 +1,45 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status config
+# --- MPS Config --------------------------------------------------------------
+APT_GUI_ICONS       := lxde-icon-theme gnome-extra-icons
+APT_GUI_WEB_CLIENTS := firefox thunderbird
+APT_GUI_TXT_CLIENTS := evince 
+APT_DSK_GNOME		:= gnome-system-monitor network-manager-gnome \
+					   gedit gedit-plugins
+APT_GUI_MM_CLIENTS  := vlc
+APT_DSK_THUNAR      := thunar thunar-data thunar-archive-plugin \
+						thunar-media-tags-plugin thunar-volman xfce4-goodies \
+						xfce4-places-plugin thunar-gtkhash thunar-vcs-plugin \
+						file-roller
+MPS_ALL				:= $(APT_GUI_ICONS) $(APT_GUI_WEB_CLIENTS) \
+					   $(APT_GUI_TXT_CLIENTS) $(APT_DSK_GNOME) \
+					   $(APT_GUI_MM_CLIENTS) $(APT_DSK_THUNAR)
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# --- Config Targets ----------------------------------------------------------
+config: 
+# --- Default Targets ---------------------------------------------------------
+install: config
+	@export DEBIAN_FRONTEND=noninteractive \
+		&& sudo -E apt install --yes $(MPS_ALL)
+uninstall:
+	@export DEBIAN_FRONTEND=noninteractive \
+		&& sudo -E apt remove --yes $(MPS_ALL)
+status: 
+	@echo "Unknown"

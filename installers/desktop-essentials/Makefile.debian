@@ -9,11 +9,12 @@ MPS_GUI_WMTOOLS		:= rofi feh lightdm compton
 MPS_GUI_TERMINAL    := kitty
 MPS_GUI_SOUND       := pulseaudio pavucontrol volumeicon
 MPS_DSK_X           := xbacklight
-MPS_DSK_GNOME_TOOLS := gnome-system-monitor gitsome gitsome \
+MPS_GUI_ICONS       := lxde-icon-theme gnome-extra-icons
+MPS_DSK_GNOME_TOOLS := gnome-system-monitor \
 						network-manager-gnome gedit gedit-plugins
 MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_WMTOOLS) \
 					   $(MPS_GUI_TERMINAL) $(MPS_DSK_SOUND) $(MPS_DSK_X) \
-					   $(MPS_DSK_GNOME_TOOLS)
+					   $(MPS_GUI_ICONS) $(MPS_DSK_GNOME_TOOLS)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""

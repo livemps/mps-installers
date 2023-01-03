@@ -9,7 +9,9 @@ MPS_DSK_I3          := i3-gaps
 MPS_PYTHON          := python-netifaces python-pygit2 python-psutil python-pip
 MPS_ALL				:= $(MPS_DSK_BUMBLEBEE) $(MPS_DSK_I3) $(MPS_PYTHON)
 MPS_AUR_EXTRAS		:= gitsome xcwd-git
-MPS_AUR_ALL 		:= $(MPS_AUR_EXTRAS)
+MPS_AUR_THEME		:= arc-solid-gtk-theme arc-gtk-theme lxde-icon-theme \
+					   gnome-icon-theme-extras
+MPS_AUR_ALL 		:= $(MPS_AUR_EXTRAS) $(MPS_AUR_THEME)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""

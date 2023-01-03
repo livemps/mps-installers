@@ -2,7 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status
+.PHONY: default help install uninstall status config
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -18,10 +18,10 @@ help:
 	@echo ""
 	@echo "  Example: make install"
 	@echo ""
-# +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install:
-	@echo "Install mpsfolder"
+# --- Config Targets ----------------------------------------------------------
+config: 
+# --- Default Targets ---------------------------------------------------------
+install: config
 uninstall:
-	@echo "Uninstall mpsfolders"
 status: 
-	@echo "Status"
+	@echo "Unknown"
