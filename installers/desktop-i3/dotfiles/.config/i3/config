@@ -9,13 +9,13 @@ set $term kitty
 #set $Mon2 HDMI-0
 #set $Resolution 1920x1080
 # Virtualbox (Arch)
-#set $Mon1 Virtual1
-#set $Mon2 Virtual1
-#set $Resolution 1680x1050
-# Virtualbox (Debian)
-set $Mon1 Virtual-1
-set $Mon2 Virtual-1
+set $Mon1 Virtual1
+set $Mon2 Virtual1
 set $Resolution 1680x1050
+# Virtualbox (Debian)
+#set $Mon1 Virtual-1
+#set $Mon2 Virtual-1
+#set $Resolution 1680x1050
 # Workspace names
 set $ws1   "1:💻"
 set $ws2   "2:🔨"
@@ -258,7 +258,8 @@ bar {
 #         }
 # }
 # Bind window classes to workspaces
-assign [class="Firefox-esr"] $ws3
+assign [class="Firefox-esr"] $ws3               # Debian
+assign [class="firefox"] $ws3                   # Arch
 assign [class="Eclipse"] $ws2
 assign [class="Gedit"] $ws2
 assign [class="Thunar"] $ws2
