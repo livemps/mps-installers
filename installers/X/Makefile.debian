@@ -7,7 +7,8 @@ default: install
 MPS_X           := xorg xserver-xorg-video-nouveau xserver-xorg-video-vesa xterm
 MPS_OGL         := mesa-utils libglu1-mesa-dev freeglut3-dev \
 						mesa-common-dev libglew-dev libglfw3-dev \
-						libglm-dev libao-dev libmpg123-dev
+						libglm-dev libao-dev libmpg123-dev \
+						libxinerama-dev libxft-dev
 MPS_ALL			:= $(MPS_X) $(MPS_OGL)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
