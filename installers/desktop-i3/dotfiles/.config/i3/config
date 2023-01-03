@@ -187,7 +187,7 @@ bar {
         position top
         workspace_buttons no
         status_command ~/.local/bin/bumblebee-status \
-            -m error network_traffic ping nic memory sensors2 cpu load kernel hostname \
+            -m error network_traffic ping nic memory cpu load kernel hostname \
             -p sensors2.showcpu="true" \
             -p sensors2.showtemp="true" \
             -p sensors2.showfan="true" \
