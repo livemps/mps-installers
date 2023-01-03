@@ -39,10 +39,10 @@ config:
 
 # --- Default Targets -------------------------------------------------------------
 install: config
-	@export DEBIAN_FRONTEND=noninteractive ; echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)
-	@export DEBIAN_FRONTEND=noninteractive ; echo "Yes" | sudo -E yay --noconfirm -S $(MPS_AUR_ALL)
+	@echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)
+	@echo "Yes" | yay --noconfirm -S $(MPS_AUR_ALL)
 uninstall:
-	@export DEBIAN_FRONTEND=noninteractive ; echo "Yes" | sudo -E pacman --noconfirm -R $(MPS_ALL)
-	@export DEBIAN_FRONTEND=noninteractive ; echo "Yes" | sudo -E yay --noconfirm -R $(MPS_AUR_ALL)
+	@echo "Yes" | sudo -E pacman --noconfirm -R $(MPS_ALL)
+	@echo "Yes" | yay --noconfirm -R $(MPS_AUR_ALL)
 status: 
 	@echo "Unknown"

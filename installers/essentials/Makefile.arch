@@ -2,7 +2,7 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status 
+.PHONY: default help install uninstall status yay
 # --- Installers Setup ---#
 MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree \
 				   extra/fontconfig python
@@ -32,7 +32,11 @@ help:
 	@echo "  Example: make install"
 	@echo ""
 # +++++ MPS Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-install: 
+yay:
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	echo "Yes" | makepkg --noconfirm -si
+install: yay
 	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_ALL)
 	@echo "Yes" | yay --noconfirm -S $(AUR_ALL)
 uninstall:
