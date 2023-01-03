@@ -4,14 +4,16 @@
 default: install
 .PHONY: default help install uninstall status config
 # --- Installers Setup ---#
-MPS_DSK_BUMBLEBEE   := aptitude progress gitsome
-MPS_DSK_I3          := lightdm i3 compton rofi feh arc-theme lxappearance \
-					   pnmixer pavucontrol
+MPS_GUI_ESSENTIALS  := galculator numlockx arandr lxappearance psutils iw xcwd
+MPS_GUI_WMTOOLS		:= rofi feh lightdm compton
+MPS_GUI_TERMINAL    := kitty
+MPS_GUI_SOUND       := pulseaudio pavucontrol volumeicon
 MPS_DSK_X           := xbacklight
-MPS_PYTHON          := python3-netifaces python3-dbus python3-tk \
-					   python3-pygit2 python3-psutil pip
-MPS_ALL				:= $(MPS_DSK_BUMBLEBEE) $(MPS_DSK_I3) $(MPS_DSK_X) \
-					   $(MPS_PYTHON)
+MPS_DSK_GNOME_TOOLS := gnome-system-monitor gitsome gitsome \
+						network-manager-gnome gedit gedit-plugins
+MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_WMTOOLS) \
+					   $(MPS_GUI_TERMINAL) $(MPS_DSK_SOUND) $(MPS_DSK_X) \
+					   $(MPS_DSK_GNOME_TOOLS)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -33,7 +35,7 @@ config:
 # --- Default Targets -------------------------------------------------------------
 install: config
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes install $(MPS_ALL)
-	@pip install bumblebee-status
+	@sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 uninstall:
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes remove $(MPS_ALL)
 status: 
