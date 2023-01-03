@@ -1,0 +1,52 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status config
+# --- Installers Setup ---#
+MPS_GUI_ESSENTIALS  := galculator numlockx arandr
+MPS_GUI_TERMINAL    := kitty
+MPS_DSK_BUMBLEBEE   := psutils iw volumeicon tk progress dbus-python
+MPS_DSK_I3          := lightdm lightdm-gtk-greeter i3-gaps picom rofi feh \
+					   lxappearance pipewire-pulse pavucontrol
+MPS_DSK_NETWORK		:= networkmanager network-manager-applet
+MPS_DSK_GNOME_TOOLS := gnome-system-monitor gedit gedit-plugins
+MPS_PYTHON          := python-netifaces python-pygit2 python-psutil python-pip
+MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_TERMINAL) \
+					   $(MPS_DSK_BUMBLEBEE) $(MPS_DSK_I3) $(MPS_DSK_X) \
+					   $(MPS_DSK_NETWORK) $(MPS_DSK_GNOME_TOOLS) $(MPS_PYTHON)
+MPS_AUR_THEME		:= arc-solid-gtk-theme arc-gtk-theme lxde-icon-theme \
+					   gnome-icon-theme-extras
+MPS_AUR_EXTRAS		:= gitsome xcwd-git clight
+MPS_AUR_ALL 		:= $(MPS_AUR_THEME) $(MPS_AUR_EXTRAS)
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# --- Fonts Download ------------------------------------------------------------
+config:
+	cp -rT dotfiles/ ~
+# --- Default Targets -------------------------------------------------------------
+install: config
+	@echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)
+	@echo "Yes" | yay --noconfirm -S $(MPS_AUR_ALL)
+	@pip install bumblebee-status
+	@sudo systemctl enable lightdm.service
+	@sudo systemctl --type=service enable NetworkManager
+	@sudo systemctl start NetworkManager
+uninstall:
+	@echo "Yes" | sudo -E pacman --noconfirm -R $(MPS_ALL)
+	@echo "Yes" | yay --noconfirm -R $(MPS_AUR_ALL)
+status: 
+	@echo "Unknown"

@@ -1,0 +1,47 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status config
+# --- Installers Setup ---#
+MPS_GUI_ESSENTIALS  := galculator numlockx arandr
+MPS_GUI_TERMINAL    := kitty
+MPS_DSK_BUMBLEBEE   := psutils gnome-system-monitor xcwd \
+						iw pulseaudio aptitude \
+						python3-tk progress python3-dbus
+MPS_DSK_I3          := lightdm i3 compton rofi feh arc-theme \
+						lxappearance pnmixer pavucontrol
+MPS_DSK_X           := xbacklight
+MPS_DSK_GNOME_TOOLS := gnome-system-monitor gitsome gitsome \
+						network-manager-gnome gedit gedit-plugins
+MPS_PYTHON          := python3-netifaces python3-pygit2 python3-psutil pip
+MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_TERMINAL) \
+					   $(MPS_DSK_BUMBLEBEE) $(MPS_DSK_I3) $(MPS_DSK_X) \
+					   $(MPS_DSK_GNOME_TOOLS) $(MPS_PYTHON)
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# --- Config Targets --------------------------------------------------------------
+config:
+	cp -rT dotfiles/ ~
+# --- Default Targets -------------------------------------------------------------
+install: config
+	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes install $(MPS_ALL)
+	@pip install bumblebee-status
+	@sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
+uninstall:
+	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes remove $(MPS_ALL)
+status: 
+	@echo "Unknown"
