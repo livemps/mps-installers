@@ -10,7 +10,7 @@ MPS_DSK_BUMBLEBEE   := psutils iw volumeicon tk progress dbus-python
 MPS_DSK_I3          := lightdm i3-gaps picom rofi feh \
 					   lxappearance pipewire-pulse pavucontrol
 MPS_DSK_NETWORK		:= networkmanager network-manager-applet
-MPS_DSK_GNOME_TOOLS := gnome-syastem-monitor gedit gedit-plugins
+MPS_DSK_GNOME_TOOLS := gnome-system-monitor gedit gedit-plugins
 MPS_PYTHON          := python-netifaces python-pygit2 python-psutil python-pip
 MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_TERMINAL) \
 					   $(MPS_DSK_BUMBLEBEE) $(MPS_DSK_I3) $(MPS_DSK_X) \

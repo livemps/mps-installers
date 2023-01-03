@@ -4,7 +4,7 @@
 default: install
 .PHONY: default help install uninstall status 
 # --- Installers Setup ---#
-MPS_X           := xorg mesa lib32-mesa xf86-video-nouveau
+MPS_X           := xorg mesa xf86-video-nouveau
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
