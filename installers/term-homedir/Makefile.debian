@@ -33,6 +33,7 @@ folders:
 	@for mpsdir in $(FOLDERS) ; do \
 		mkdir -p $(MPS_ROOT)/$$mpsdir ; \
 	done ;
+	sudo chown $(USER):$(USER) -R ~/.cache
 symlinks: $(MPS_ROOT)
 	@if [ ! "$(SYMLINKS)" = "" ] ; then \
 		cd $(MPS_ROOT)/disks/ ; \

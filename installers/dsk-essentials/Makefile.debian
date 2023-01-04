@@ -32,7 +32,8 @@ help:
 	@echo ""
 # --- Config Targets --------------------------------------------------------------
 config:
-	cp -rT dotfiles/ ~
+	@cp -rT dotfiles/ ~
+	@sudo chown $(USER):$(USER) -R ~/.cache
 # --- Default Targets -------------------------------------------------------------
 install: config
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes install $(MPS_ALL)
