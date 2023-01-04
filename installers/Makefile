@@ -52,29 +52,60 @@ help:
 	@echo ""
 	@echo "  make [DISTRO=DISTRO] [INST=Components] TARGET"
 	@echo "      DISTRO:"
-	@echo "         arch       : Arch Linux"
-	@echo "         debian     : Debian Linux"
+	@echo "         Arch            : Arch Linux"
+	@echo "         Debian          : Debian Linux"
 	@echo ""
-	@echo "      TARGETS:"
-	@echo "         help       : Help menu"
-	@echo "         install    : Install components"
-	@echo "         uninstall  : Uninstall components"
-	@echo "         status     : Current status"
+	@echo "      DEFAULT TARGETS:"
+	@echo "         help            : Help menu"
+	@echo "         install         : Install components"
+	@echo "         uninstall       : Uninstall components"
+	@echo "         status          : Current status"
 	@echo ""
-	@echo "      COMPONENTS:"
-	@echo "         mpsfolders : default dotfiles and home folders"
-	@echo "         skeleton   : template files"
-	@echo "         vim        : vim + neovim + config + plugins"
+	@echo "      META TARGETS:"
+	@echo "         term-min        : (essentials,homedir)"
+	@echo "         term-std        : term-min + (fonts vim)"
+	@echo "         term-max        : term-std + (texlive)"
+	@echo "         dsk-min         : (dsk-x dsk-essentials)"
+	@echo "         dsk-std         : dsk-min + (dsk-i3)"
+	@echo "         dsk-max         : dsk-std + (dsk-tools)"
 	@echo ""
-	@echo "  Example: make DISTRO=debian INST="vim mpsfolders" install"
+	@echo "      TERMINAL-INSTALLERS:"
+	@echo "         term-essentials : curl,wget,zip,etc."
+	@echo "         term-homedir    : essential mps folders"
+	@echo "         term-fonts      : Some nerdfonts"
+	@echo "         term-vim        : vim, neovim"
 	@echo ""
-# # +++++ Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+	@echo "      DESKTOP-INSTALLERS :"
+	@echo "         dsk-essentials  : kitty,pavucontrol,etc."
+	@echo "         dsk-i3          : i3 window manager"
+	@echo "         dsk-dwm         : dwm window manager"
+	@echo "         dsk-tools       : firefox,thunderbird,etc."
+	@echo ""
+	@echo "  Examples :"
+	@echo "    META   : make term-min"
+	@echo "    INST   : make INST="term-essentials term-homedir" install"
+	@echo "    DISTRO : make DISTRO=Debian INST="term-essentials" install"
+	@echo ""
+# +++++ Default Targets +++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 install: distrotest upgrade
 	$(call doJobs,$@)
 uninstall: distrotest upgrade
 	$(call doJobs,$@)
 status:
 	$(call doJobs,$@)
+# +++++ Meta Targets ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+term-min: distrotest upgrade
+	@make INST="term-essentials term-homedir"
+term-std: distrotest upgrade term-min
+	@make INST="term-fonts term-vim"
+term-max: distrotest upgrade term-std
+dsk-min: distrotest upgrade term-min
+	@make INST="dsk-x dsk-essentials"
+dsk-std: distrotest upgrade dsk-min
+	@make INST="dsk-i3 dsk-dwm"
+dsk-max: distrotest upgrade dsk-std
+	@make INST="dsk-tools"
+# +++++ Docker Targets ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 docker-clean: distrotest
 	-docker container rm mps-min-$(MKEXT)
 	-docker rmi $(docker images -a -f 'dangling=true' -q)
@@ -86,4 +117,5 @@ docker-stop: distrotest
 	-docker container stop mps-min-$(MKEXT)
 docker-start: distrotest docker-stop docker-build
 	-docker container rm mps-min-$(MKEXT)
-	docker run -it --name mps-min-$(MKEXT) mps-min-$(MKEXT)	
+	docker run -it --name mps-min-$(MKEXT) mps-min-$(MKEXT)
+
