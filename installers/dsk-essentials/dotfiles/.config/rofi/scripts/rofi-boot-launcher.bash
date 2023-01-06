@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEME_FOLDER=/home/user/mps/repo/mps-installers/installers/dsk-essentials/dotfiles/.config/rofi/config
+THEME_FOLDER=/usr/share/rofi/themes
 THEME_NAME=rofi-boot-launcher.rasi
 
 rofi -modi drun,run,window,filebrowser,ssh,keys -show drun \
