@@ -8,13 +8,14 @@ MPS_FOLDER_SNIPPETS		:=~/mps/snippets
 MPS_FOLDER_THEMES		:=/usr/share/rofi/themes
 MPS_FOLDER_REPO			:=~/mps/repo/mps/rofi
 MPS_ROFI_URL			:=https://github.com/davatorium/rofi.git
-MPS_ROFI_DEPS  			:= check libxcb-icccm4-dev libxcb-ewmh-dev \
+MPS_BUILD_DEPS			:= check automake bison flex
+MPS_ROFI_DEPS  			:= libxcb-icccm4-dev libxcb-ewmh-dev \
 							libxcb-cursor-dev libxcb-randr0-dev \
 							libxcb-util0-dev libxcb-xinerama0-dev \
-							libxkbcommon-x11-dev libstartup-notification0 \
+							libxkbcommon-x11-dev libstartup-notification0-dev \
 							libglib2.0-dev libcairo2-dev libpango1.0-dev \
-							libpangocairo-1.0-0
-MPS_ALL					:= $(MPS_ROFI_DEPS)
+							libpangocairo-1.0-0 libgdk-pixbuf-2.0-dev
+MPS_ALL					:= $(MPS_BUILD_DEPS) $(MPS_ROFI_DEPS)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""

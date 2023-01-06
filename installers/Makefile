@@ -99,10 +99,10 @@ term-min: distrotest upgrade
 term-std: distrotest upgrade term-min
 	@make INST="term-fonts term-vim"
 term-max: distrotest upgrade term-std
-dsk-min: distrotest upgrade term-min
+dsk-min: distrotest upgrade
 	@make INST="dsk-x dsk-essentials"
 dsk-std: distrotest upgrade dsk-min
-	@make INST="dsk-i3 dsk-dwm"
+	@make INST="dsk-rofi dsk-i3 dsk-dwm"
 dsk-max: distrotest upgrade dsk-std
 	@make INST="dsk-tools"
 # +++++ Docker Targets ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 

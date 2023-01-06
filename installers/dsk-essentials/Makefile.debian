@@ -9,7 +9,7 @@ CFG_ROFI		:=dotfiles/.config/rofi
 CFG_THEMES		:=/usr/share/rofi/themes
 MPS_GUI_ESSENTIALS  	:= galculator numlockx xclip arandr \
 			   lxappearance psutils iw xcwd
-MPS_GUI_WMTOOLS		:= rofi feh lightdm compton
+MPS_GUI_WMTOOLS		:= feh lightdm compton
 MPS_GUI_TERMINAL    	:= kitty tilda
 MPS_GUI_SOUND       	:= pulseaudio pavucontrol volumeicon-alsa
 MPS_DSK_X           	:= xbacklight xclip 
