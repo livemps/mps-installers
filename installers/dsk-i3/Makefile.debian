@@ -5,7 +5,7 @@ default: install
 .PHONY: default help install uninstall status config
 # --- Installers Setup ---#
 MPS_DSK_BUMBLEBEE   := aptitude progress gitsome
-MPS_DSK_I3          := lightdm i3 compton rofi feh arc-theme lxappearance \
+MPS_DSK_I3          := lightdm i3 compton feh arc-theme lxappearance \
 					   pnmixer pavucontrol
 MPS_DSK_X           := xbacklight
 MPS_PYTHON          := python3-netifaces python3-dbus python3-tk \
