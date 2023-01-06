@@ -32,10 +32,8 @@ config: clone
 	@sudo cp config-dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
 # --- Default Targets -------------------------------------------------------------
 install: config
-		@cd ~/mps/repo/git.suckless.org/dwm \
-		&& make && sudo make install
+	@cd $(DWM_REPO) && make && sudo make install
 uninstall:
-		@cd ~/mps/repo/git.suckless.org/dwm \
-		&& sudo make uninstall
+	@cd $(DWM_REPO) && make && sudo make install
 status: 
 	@echo "Unknown"
