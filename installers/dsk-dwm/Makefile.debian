@@ -28,7 +28,8 @@ clone:
 		&& cd $(DWM_REPO) && make && sudo make install
 config: clone
 	@-sudo mkdir -p /usr/share/xsessions
-	@sudo cp config-dwm/.xprofile ~
+	@cp config-dwm/autostart.sh ~/mps/snippets
+	@cp config-dwm/.xsessionrc ~
 	@sudo cp config-dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
 # --- Default Targets -------------------------------------------------------------
 install: config
