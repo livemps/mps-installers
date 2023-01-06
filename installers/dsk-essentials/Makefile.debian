@@ -11,7 +11,7 @@ MPS_GUI_ESSENTIALS  := galculator numlockx arandr lxappearance psutils iw xcwd
 MPS_GUI_WMTOOLS		:= rofi feh lightdm compton
 MPS_GUI_TERMINAL    := kitty
 MPS_GUI_SOUND       := pulseaudio pavucontrol volumeicon-alsa
-MPS_DSK_X           := xbacklight
+MPS_DSK_X           := xbacklight xclip gksu
 MPS_GUI_ICONS       := lxde-icon-theme gnome-extra-icons
 MPS_DSK_GNOME_TOOLS := gnome-system-monitor \
 						network-manager-gnome gedit gedit-plugins
@@ -36,11 +36,9 @@ help:
 # --- Config Targets --------------------------------------------------------------
 config-rofi:
 	@-sudo mkdir -p $(CFG_THEMES)
-	@sudo cp $(CFG_ROFI)/config/rofi-boot-launcher.rasi $(CFG_THEMES)
-	@sudo cp $(CFG_ROFI)/config/rofi-boot-powermenu.rasi $(CFG_THEMES)
 	@-sudo mkdir -p $(MPS_SNIPPETS)
-	@sudo cp $(CFG_ROFI)/scripts/rofi-boot-launcher.bash $(MPS_SNIPPETS)
-	@sudo cp $(CFG_ROFI)/scripts/rofi-boot-powermenu.bash $(MPS_SNIPPETS)
+	@sudo cp $(CFG_ROFI)/config/* $(CFG_THEMES)
+	@sudo cp $(CFG_ROFI)/scripts/* $(MPS_SNIPPETS)
 config: config-rofi
 	@cp -rT dotfiles/ ~
 	@sudo chown $(USER):$(USER) -R ~/.cache
