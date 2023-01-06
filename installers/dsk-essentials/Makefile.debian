@@ -6,7 +6,7 @@ default: install
 # --- Installers Setup ---#
 MPS_GUI_ESSENTIALS  	:= galculator numlockx xclip arandr \
 			                 lxappearance psutils iw xcwd
-MPS_GUI_WMTOOLS		    := feh lightdm compton
+MPS_GUI_WMTOOLS		    := feh lightdm picom
 MPS_GUI_TERMINAL    	:= kitty tilda
 MPS_GUI_SOUND       	:= pulseaudio pavucontrol volumeicon-alsa
 MPS_GUI_X           	:= xbacklight xclip 
@@ -34,7 +34,6 @@ help:
 # --- Config Targets --------------------------------------------------------------
 config: 
 	@cp -rT dotfiles/ ~
-	@mv ~/.config/compton.conf ~/.config.picom.conf
 	@sudo chown $(USER):$(USER) -R ~/.cache
 # --- Default Targets -------------------------------------------------------------
 install: config
