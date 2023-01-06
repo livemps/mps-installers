@@ -37,10 +37,10 @@ help:
 	@echo ""
 # --- Config Targets --------------------------------------------------------------
 config-rofi:
+	-mkdir -p $(MPS_SNIPPETS)
+	cp $(CFG_ROFI)/scripts/* $(MPS_SNIPPETS)
 	-sudo mkdir -p $(CFG_THEMES)
-	-sudo mkdir -p $(MPS_SNIPPETS)
 	sudo cp $(CFG_ROFI)/config/* $(CFG_THEMES)
-	sudo cp $(CFG_ROFI)/scripts/* $(MPS_SNIPPETS)
 config: config-rofi
 	cp -rT dotfiles/ ~
 # --- Default Targets -------------------------------------------------------------
