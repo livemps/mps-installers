@@ -15,14 +15,14 @@ function cpuinfo {
     STR_MODEL=$(lscpu | grep "Model name:" | cut -d":" -f2 | xargs)
     STR_NUMCPU=$(lscpu | grep -e "^CPU(s):" | cut -d":" -f2 | xargs)
     STR_MEM=$(free -m -h -t | grep Total: | cut -d":" -f2 | xargs)
-    printf "%-13s: %s\n" CPU "$STR_MODEL ($STR_ARCH) => $STR_NUMCPU Cores"
+    printf "%-13s: %s\n" CPU "$STR_MODEL ($STR_ARCH)"
 }
 function kernelinfo {
-    STR_KERNEL=$(uname -a)
+    STR_KERNEL=$(uname -v)
     printf "%-13s: %s\n" Kernel "$STR_KERNEL"
 
 }
-kernelinfo
 cpuinfo
 meminfo
+kernelinfo
 netinfo

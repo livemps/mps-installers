@@ -8,32 +8,10 @@ esac
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
-# Construct color prompt
+#--- Prompt -------------------------------------------------------------------
 . ~/.bashrc_colors
-PS1="\
-\$(RET=\$? ; if [[ \$RET -gt 0 ]]; then\
-    printf \"\\${CPref}\\${BIRed}\\${CSuf}[\$RET]\"; else \
-    printf \"\\${CPref}\\${BIGreen}\\${CSuf}[\$RET]\"; fi) \
-\$(if [[ \$USER == "root" ]]; then \
-    printf \"\\${CPref}\\${BIRed}\\${CSuf}\"; else\
-    printf \"\\${CPref}\\${BGreen}\\${CSuf}\"; fi)\
-\u\
-\001${BIPurple}\002@\
-\001${BGreen}\002\h\
-\001${BIWhite}\002:\
-\001${BBlue}\002\W\
-\$(if [[ \$USER == "root" ]]; then \
-    printf \"\\${CPref}\\${BIRed}\\${CSuf}\"; else\
-    printf \"\\${CPref}\\${BIPurple}\\${CSuf}\"; fi)\
-\$\
-\001${Color_Off}\002 "
-# Check color prompt
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    export PS1=$PS1
-else
-    export PS1='[\$?] \u@\h:\W\$ '
-fi
-unset color_prompt force_color_prompt
+. ~/.bashrc_distro
+. ~/.bashrc_prompt
 #--- History ------------------------------------------------------------------
 HISTSIZE=9999
 HISTFILESIZE=9999
@@ -58,4 +36,4 @@ fi
 #--- Environment Variable -----------------------------------------------------
 export PATH=$PATH:~/mps/snippets
 export EDITOR=nvim
-neofetch
+export TERM=kitty

@@ -1,3 +1,4 @@
 #!/bin/bash
-SAYING=$(fortune -a)
+SAYING=$(fortune -o)
 cowsay "$SAYING"
+echo ""
