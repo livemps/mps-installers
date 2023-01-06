@@ -1,0 +1,60 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status config config-rofi
+# --- Installers Setup ---#
+MPS_SNIPPETS		:=~/mps/snippets
+CFG_ROFI		:=dotfiles/.config/rofi
+CFG_THEMES		:=/usr/share/rofi/themes
+MPS_GUI_ESSENTIALS  	:= galculator numlockx xclip arandr \
+			   lxappearance psutils iw
+MPS_GUI_WMTOOLS		:= rofi feh lightdm lightdm-gtk-greeter picom
+MPS_GUI_TERMINAL    	:= kitty tilda
+MPS_GUI_SOUND	    	:= pipewire-pulse pavucontrol
+MPS_DSK_NETWORK		:= networkmanager network-manager-applet
+MPS_DSK_GNOME_TOOLS 	:= gnome-system-monitor gedit gedit-plugins
+MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_WMTOOLS) \
+					   $(MPS_GUI_TERMINAL) $(MPS_DSK_SOUND) \
+					   $(MPS_DSK_NETWORK) $(MPS_DSK_GNOME_TOOLS)
+MPS_AUR_THEME		:= arc-solid-gtk-theme arc-gtk-theme lxde-icon-theme \
+					   gnome-icon-theme-extras
+MPS_AUR_EXTRAS		:= clight gksu
+MPS_AUR_ALL 		:= $(MPS_AUR_THEME) $(MPS_AUR_EXTRAS)
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# --- Config Targets --------------------------------------------------------------
+config-rofi:
+	-mkdir -p $(MPS_SNIPPETS)
+	cp $(CFG_ROFI)/scripts/* $(MPS_SNIPPETS)
+	-sudo mkdir -p $(CFG_THEMES)
+	sudo cp $(CFG_ROFI)/config/* $(CFG_THEMES)
+config: config-rofi
+	cp -rT dotfiles/ ~
+# --- Default Targets -------------------------------------------------------------
+install: config
+	@echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)
+	@echo "Yes" | yay --noconfirm -S $(MPS_AUR_ALL)
+	@sudo systemctl enable lightdm.service
+	@sudo systemctl --type=service enable NetworkManager
+	@sudo systemctl start NetworkManager
+	@sudo chsh -s /bin/bash $(USER)
+
+uninstall:
+	@echo "Yes" | sudo -E pacman --noconfirm -R $(MPS_ALL)
+	@echo "Yes" | yay --noconfirm -R $(MPS_AUR_ALL)
+status: 
+	@echo "Unknown"

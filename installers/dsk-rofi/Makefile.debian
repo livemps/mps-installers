@@ -1,0 +1,54 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install install-rofi uninstall config config-rofi
+# --- Installers Setup ---#
+MPS_FOLDER_SNIPPETS		:=~/mps/snippets
+MPS_FOLDER_THEMES		:=/usr/share/rofi/themes
+MPS_FOLDER_REPO			:=~/mps/repo/mps/rofi
+MPS_ROFI_URL			:=https://github.com/davatorium/rofi.git
+MPS_ROFI_DEPS  			:= check libxcb-icccm4-dev libxcb-ewmh-dev \
+							libxcb-cursor-dev libxcb-randr0-dev \
+							libxcb-util0-dev libxcb-xinerama0-dev \
+							libxkbcommon-x11-dev libstartup-notification0 \
+							libglib2.0-dev libcairo2-dev libpango1.0-dev \
+							libpangocairo-1.0-0
+MPS_ALL					:= $(MPS_ROFI_DEPS)
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# --- Config Targets --------------------------------------------------------------
+config-rofi:
+	-mkdir -p $(MPS_FOLDER_SNIPPETS)
+	cp config-rofi/scripts/* $(MPS_FOLDER_SNIPPETS)
+	-sudo mkdir -p $(MPS_FOLDER_THEMES)
+	sudo cp config-rofi/config.rasi ~/.config/rofi/config.rasi
+	sudo cp -r config-rofi/config/* $(MPS_FOLDER_THEMES)
+config: config-rofi
+# --- Default Targets -------------------------------------------------------------
+install-rofi:
+	@sudo apt install $(MPS_ALL)
+	@-rm -rf $(MPS_FOLDER_REPO)
+	@mkdir $(MPS_FOLDER_REPO)
+	@git clone $(MPS_ROFI_URL) $(MPS_FOLDER_REPO)
+	@cd $(MPS_FOLDER_REPO) && git submodule update --init \
+		&& autoreconf -i && mkdir build && cd build \
+		&& ../configure --prefix=/usr/ && make && sudo make install
+install: install-rofi config
+
+uninstall:
+	@cd $(MPS_FOLDER_REPO)/build && sudo make uninstall
+	@rm -rf $(MPS_FOLDER_REPO)
