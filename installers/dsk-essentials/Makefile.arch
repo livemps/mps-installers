@@ -2,8 +2,11 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status config
+.PHONY: default help install uninstall status config config-rofi
 # --- Installers Setup ---#
+MPS_SNIPPETS		:=~/mps/snippets
+CFG_ROFI			:=dotfiles/.config/rofi
+CFG_THEMES			:=/usr/share/rofi/themes
 MPS_GUI_ESSENTIALS  := galculator numlockx arandr lxappearance psutils iw
 MPS_GUI_WMTOOLS		:= rofi feh lightdm lightdm-gtk-greeter picom
 MPS_GUI_TERMINAL    := kitty
@@ -32,9 +35,16 @@ help:
 	@echo ""
 	@echo "  Example: make install"
 	@echo ""
-# --- Fonts Download ------------------------------------------------------------
-config:
-	cp -rT dotfiles/ ~
+# --- Config Targets --------------------------------------------------------------
+config-rofi:
+	@-sudo mkdir -p $(CFG_THEMES)
+	@sudo cp $(CFG_ROFI)/config/rofi-boot-launcher.rasi $(CFG_THEMES)
+	@sudo cp $(CFG_ROFI)/config/rofi-boot-powermenu.rasi $(CFG_THEMES)
+	@-sudo mkdir -p $(MPS_SNIPPETS)
+	@sudo cp $(CFG_ROFI)/scripts/rofi-boot-launcher.bash $(MPS_SNIPPETS)
+	@sudo cp $(CFG_ROFI)/scripts/rofi-boot-powermenu.bash $(MPS_SNIPPETS)
+config: config-rofi
+	@cp -rT dotfiles/ ~
 # --- Default Targets -------------------------------------------------------------
 install: config
 	@echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)

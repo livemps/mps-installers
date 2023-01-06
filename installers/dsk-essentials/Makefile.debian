@@ -2,8 +2,11 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall status config
+.PHONY: default help install uninstall config config-rofi
 # --- Installers Setup ---#
+MPS_SNIPPETS		:=~/mps/snippets
+CFG_ROFI			:=dotfiles/.config/rofi
+CFG_THEMES			:=/usr/share/rofi/themes
 MPS_GUI_ESSENTIALS  := galculator numlockx arandr lxappearance psutils iw xcwd
 MPS_GUI_WMTOOLS		:= rofi feh lightdm compton
 MPS_GUI_TERMINAL    := kitty
@@ -31,7 +34,14 @@ help:
 	@echo "  Example: make install"
 	@echo ""
 # --- Config Targets --------------------------------------------------------------
-config:
+config-rofi:
+	@-sudo mkdir -p $(CFG_THEMES)
+	@sudo cp $(CFG_ROFI)/config/rofi-boot-launcher.rasi $(CFG_THEMES)
+	@sudo cp $(CFG_ROFI)/config/rofi-boot-powermenu.rasi $(CFG_THEMES)
+	@-sudo mkdir -p $(MPS_SNIPPETS)
+	@sudo cp $(CFG_ROFI)/scripts/rofi-boot-launcher.bash $(MPS_SNIPPETS)
+	@sudo cp $(CFG_ROFI)/scripts/rofi-boot-powermenu.bash $(MPS_SNIPPETS)
+config: config-rofi
 	@cp -rT dotfiles/ ~
 	@sudo chown $(USER):$(USER) -R ~/.cache
 # --- Default Targets -------------------------------------------------------------
@@ -40,5 +50,3 @@ install: config
 	@sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 uninstall:
 	@export DEBIAN_FRONTEND=noninteractive ; sudo -E apt --yes remove $(MPS_ALL)
-status: 
-	@echo "Unknown"
