@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 # Construct Prompt
 PS1="\
 \$(RET=\$? ; if [[ \$RET -gt 0 ]]; then\
@@ -17,11 +15,10 @@ elif [[ \$DISTRO == "Debian" ]]; then \
 \001${BIRed}\002@\
 \001${BGreen}\002\h\
 \001${BIWhite}\002:\
-\001${BBlue}\002\W\
+\001${BIBlue}\002\W\
 \$(if [[ \$USER == "root" ]]; then \
     printf \"\\${CPref}\\${BIRed}\\${CSuf}\"; else\
-    printf \"\\${CPref}\\${BIPurple}\\${CSuf}\"; fi)\
-\001${BIGreen}\002\
+    printf \"\\${CPref}\\${BIGreen}\\${CSuf}\"; fi)\
  \
 \001${Color_Off}\002 "
 # Check color prompt
