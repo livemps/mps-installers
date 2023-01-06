@@ -2,23 +2,20 @@
 # --- Makefile Setup ---#
 .ONESHELL:
 default: install
-.PHONY: default help install uninstall config config-rofi
+.PHONY: default help install uninstall config 
 # --- Installers Setup ---#
-MPS_SNIPPETS		:=~/mps/snippets
-CFG_ROFI		:=dotfiles/.config/rofi
-CFG_THEMES		:=/usr/share/rofi/themes
 MPS_GUI_ESSENTIALS  	:= galculator numlockx xclip arandr \
-			   lxappearance psutils iw xcwd
-MPS_GUI_WMTOOLS		:= feh lightdm compton
+			                 lxappearance psutils iw xcwd
+MPS_GUI_WMTOOLS		    := feh lightdm compton
 MPS_GUI_TERMINAL    	:= kitty tilda
 MPS_GUI_SOUND       	:= pulseaudio pavucontrol volumeicon-alsa
-MPS_DSK_X           	:= xbacklight xclip 
+MPS_GUI_X           	:= xbacklight xclip 
 MPS_GUI_ICONS       	:= lxde-icon-theme gnome-extra-icons
-MPS_DSK_GNOME_TOOLS 	= gnome-system-monitor \
-			  network-manager-gnome gedit gedit-plugins
-MPS_ALL			:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_WMTOOLS) \
-			   $(MPS_GUI_TERMINAL) $(MPS_DSK_SOUND) $(MPS_DSK_X) \
-			   $(MPS_GUI_ICONS) $(MPS_DSK_GNOME_TOOLS)
+MPS_GUI_GNOME_TOOLS 	:= gnome-system-monitor \
+			                 network-manager-gnome gedit gedit-plugins
+MPS_ALL			        := $(MPS_GUI_ESSENTIALS) $(MPS_GUI_WMTOOLS) \
+			                $(MPS_GUI_TERMINAL) $(MPS_GUI_SOUND) $(MPS_GUI_X) \
+			                $(MPS_GUI_ICONS) $(MPS_GUI_GNOME_TOOLS)
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -35,12 +32,7 @@ help:
 	@echo "  Example: make install"
 	@echo ""
 # --- Config Targets --------------------------------------------------------------
-config-rofi:
-	-mkdir -p $(MPS_SNIPPETS)
-	cp $(CFG_ROFI)/scripts/* $(MPS_SNIPPETS)
-	-sudo mkdir -p $(CFG_THEMES)
-	sudo cp $(CFG_ROFI)/config/* $(CFG_THEMES)
-config: config-rofi
+config: 
 	@cp -rT dotfiles/ ~
 	@mv ~/.config/compton.conf ~/.config.picom.conf
 	@sudo chown $(USER):$(USER) -R ~/.cache

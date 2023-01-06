@@ -41,7 +41,7 @@ config-rofi:
 config: config-rofi
 # --- Default Targets -------------------------------------------------------------
 install-rofi:
-	@sudo apt install $(MPS_ALL)
+	@export DEBIAN_FRONTEND=noninteracttive && sudo -E apt install $(MPS_ALL) --yes
 	@-rm -rf $(MPS_FOLDER_REPO)
 	@mkdir $(MPS_FOLDER_REPO)
 	@git clone $(MPS_ROFI_URL) $(MPS_FOLDER_REPO)
@@ -51,5 +51,6 @@ install-rofi:
 install: install-rofi config
 
 uninstall:
+	@export DEBIAN_FRONTEND=noninteracttive && sudo -E apt remove $(MPS_ALL) --yes
 	@cd $(MPS_FOLDER_REPO)/build && sudo make uninstall
 	@rm -rf $(MPS_FOLDER_REPO)

@@ -9,7 +9,7 @@ MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree fontconfig \
 MPS_TRANSPORT	:= ca-certificates curl wget gnupg 
 MPS_ARCHIVES	:= zip unzip bzip2
 MPS_BASHUTILS   := cowsay fortune fortunes-de fortunes-off cmatrix console-setup
-MPS_BUILD       := gcc gdb build-essential
+MPS_BUILD       := gcc gdb build-essential check flex bison automake
 MPS_NETWORK     := net-tools iptables tcpdump iw ssh nmap netcat dnsutils
 MPS_ALL			:= $(MPS_ESSENTIALS) $(MPS_TRANSPORT) \
 					$(MPS_ARCHIVES) $(MPS_BASHUTILS) \
