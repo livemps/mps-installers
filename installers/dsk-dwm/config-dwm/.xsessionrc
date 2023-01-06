@@ -1,4 +1,4 @@
 #!/bin/sh
 
-source ~/mps/snippets/autostart.sh
+~/mps/snippets/autostart.sh
 
