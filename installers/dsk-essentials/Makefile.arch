@@ -12,7 +12,7 @@ MPS_GUI_SOUND	    := pipewire-pulse pavucontrol volumeicon
 MPS_DSK_NETWORK		:= networkmanager network-manager-applet
 MPS_DSK_GNOME_TOOLS 	:= gnome-system-monitor gedit gedit-plugins
 MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_WMTOOLS) \
-					   $(MPS_GUI_TERMINAL) $(MPS_DSK_SOUND) \
+					   $(MPS_GUI_TERMINAL) $(MPS_GUI_SOUND) \
 					   $(MPS_DSK_NETWORK) $(MPS_DSK_GNOME_TOOLS)
 MPS_AUR_THEME		:= arc-solid-gtk-theme arc-gtk-theme lxde-icon-theme \
 					   gnome-icon-theme-extras
