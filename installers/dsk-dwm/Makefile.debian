@@ -3,6 +3,8 @@
 .ONESHELL:
 default: install
 .PHONY: default help install uninstall status clone config
+# --- MPS Setup ---#
+DWM_REPO		:=~/mps/repo/mps/mps-dwm 
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -20,13 +22,14 @@ help:
 	@echo ""
 # --- Fonts Download ------------------------------------------------------------
 clone:
-	@rm -rf ~/mps/repo/git.suckless.org/dwm \
-		&& mkdir -p ~/mps/repo/git.suckless.org/dwm \
-		&& git clone git://git.suckless.org/dwm ~/mps/repo/git.suckless.org/dwm
+	@rm -rf $(DWM_REPO) \
+		&& mkdir -p $(DWM_REPO) \
+		&& git clone ssh://git@github.com/livemps/mps-dwm $(DWM_REPO) \
+		&& cd $(DWM_REPO) && make && sudo make install
 config: clone
+	@-sudo mkdir -p /usr/share/xsessions
+	@sudo cp config-dwm/.xprofile ~
 	@sudo cp config-dwm/dwm.desktop /usr/share/xsessions/dwm.desktop
-	@cp config-dwm/config.h ~/mps/repo/git.suckless.org/dwm/config.h
-	@cp config-dwm/config.def.h ~/mps/repo/git.suckless.org/dwm/config.def.h
 # --- Default Targets -------------------------------------------------------------
 install: config
 		@cd ~/mps/repo/git.suckless.org/dwm \

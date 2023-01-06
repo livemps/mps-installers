@@ -12,7 +12,7 @@ MPS_GUI_ESSENTIALS  	:= galculator numlockx xclip arandr \
 MPS_GUI_WMTOOLS		:= rofi feh lightdm compton
 MPS_GUI_TERMINAL    	:= kitty tilda
 MPS_GUI_SOUND       	:= pulseaudio pavucontrol volumeicon-alsa
-MPS_DSK_X           	:= xbacklight xclip gksu
+MPS_DSK_X           	:= xbacklight xclip 
 MPS_GUI_ICONS       	:= lxde-icon-theme gnome-extra-icons
 MPS_DSK_GNOME_TOOLS 	= gnome-system-monitor \
 			  network-manager-gnome gedit gedit-plugins
@@ -42,6 +42,7 @@ config-rofi:
 	sudo cp $(CFG_ROFI)/config/* $(CFG_THEMES)
 config: config-rofi
 	@cp -rT dotfiles/ ~
+	@mv ~/.config/compton.conf ~/.config.picom.conf
 	@sudo chown $(USER):$(USER) -R ~/.cache
 # --- Default Targets -------------------------------------------------------------
 install: config
