@@ -35,8 +35,9 @@ help:
 config-rofi:
 	-mkdir -p $(MPS_FOLDER_SNIPPETS)
 	cp config-rofi/scripts/* $(MPS_FOLDER_SNIPPETS)
+	-mkdir -p ~/.config/rofi
+	cp config-rofi/config.rasi ~/.config/rofi/config.rasi
 	-sudo mkdir -p $(MPS_FOLDER_THEMES)
-	sudo cp config-rofi/config.rasi ~/.config/rofi/config.rasi
 	sudo cp -r config-rofi/config/* $(MPS_FOLDER_THEMES)
 config: config-rofi
 # --- Default Targets -------------------------------------------------------------
