@@ -7,7 +7,7 @@ default: install
 MPS_GUI_ESSENTIALS  	:= galculator numlockx xclip arandr \
 			                 lxappearance psutils iw xcwd
 MPS_GUI_WMTOOLS		    := feh lightdm picom
-MPS_GUI_TERMINAL    	:= kitty tilda
+MPS_GUI_TERMINAL    	:= kitty tilda ssh-askpass
 MPS_GUI_SOUND       	:= pulseaudio pavucontrol volumeicon-alsa
 MPS_GUI_X           	:= xbacklight xclip 
 MPS_GUI_ICONS       	:= lxde-icon-theme gnome-extra-icons
