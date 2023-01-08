@@ -36,6 +36,7 @@ help:
 # --- Config Targets --------------------------------------------------------------
 config:
 	cp -rT dotfiles/ ~
+	cp -rT snippets/ ~/mps/snippets
 # --- Default Targets -------------------------------------------------------------
 install: config
 	@echo "Yes" | sudo -E pacman --noconfirm -S $(MPS_ALL)
