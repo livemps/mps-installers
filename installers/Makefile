@@ -102,7 +102,7 @@ term-max: distrotest upgrade term-std
 dsk-min: distrotest upgrade
 	@make INST="dsk-x dsk-essentials"
 dsk-std: distrotest upgrade dsk-min
-	@make INST="dsk-rofi dsk-dwm"
+	@make INST="dsk-rofi dsk-qtile"
 dsk-max: distrotest upgrade dsk-std
 	@make INST="dsk-tools"
 # +++++ Docker Targets ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
