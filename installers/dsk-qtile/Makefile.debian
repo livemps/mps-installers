@@ -1,0 +1,35 @@
+# +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# --- Makefile Setup ---#
+.ONESHELL:
+default: install
+.PHONY: default help install uninstall status config
+MPS_TOOLS := libpangocairo-1.0-0 python3-pip python3-xcffib python3-cairocffi
+# +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+help:
+	@echo ""
+	@echo "Usage: "
+	@echo ""
+	@echo "  make TARGET"
+	@echo ""
+	@echo "      TARGETS:"
+	@echo "         help      : Help menu"
+	@echo "         install   : Install components"
+	@echo "         uninstall : Uninstall components"
+	@echo "         status    : Current status"
+	@echo ""
+	@echo "  Example: make install"
+	@echo ""
+# --- Fonts Download ------------------------------------------------------------
+config: 
+	@-sudo mkdir -p /usr/share/xsessions
+	@sudo cp config-qtile/qtile.desktop /usr/share/xsessions/qtile.desktop
+	@cp config-qtile/.xsessionrc ~
+	mkdir -p ~/.config/qtile
+	cp config-qtile/config.py ~/.config/qtile/config.ini
+# --- Default Targets -------------------------------------------------------------
+install: config
+	@export DEBIAN_FRONTEND=noninteractive && sudo -E apt install --yes $(MPS_TOOLS)
+uninstall:
+	@export DEBIAN_FRONTEND=noninteractive && sudo -E apt remove --yes $(MPS_TOOLS)
+status: 
+	@echo "Unknown"
