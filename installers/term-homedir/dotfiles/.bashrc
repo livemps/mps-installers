@@ -34,6 +34,6 @@ if ! shopt -oq posix; then
   fi
 fi
 #--- Environment Variable -----------------------------------------------------
-export PATH=$PATH:~/mps/snippets
+export PATH=$PATH:~/mps/snippets:~/.local/bin
 export EDITOR=nvim
 export TERM=kitty

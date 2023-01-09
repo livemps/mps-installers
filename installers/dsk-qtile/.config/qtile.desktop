@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=dwm
+Name=qtile
 Comment=Dynamic Window Manager
-Exec=dwm
-Icon=dwm
+Exec=/home/user/.local/bin/qtile start
+Icon=qtile
 Type=XSession

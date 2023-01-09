@@ -3,7 +3,7 @@
 .ONESHELL:
 default: install
 .PHONY: default help install uninstall status config
-MPS_TOOLS := libpangocairo-1.0-0 python3-pip python3-xcffib python3-cairocffi
+MPS_TOOLS := libpangocairo-1.0-0 python3-xcffib python3-cairocffi
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -23,13 +23,16 @@ help:
 config: 
 	@-sudo mkdir -p /usr/share/xsessions
 	@sudo cp config-qtile/qtile.desktop /usr/share/xsessions/qtile.desktop
-	@cp config-qtile/.xsessionrc ~
+	@cp config-qtile/.xprofile ~
 	mkdir -p ~/.config/qtile
 	cp config-qtile/config.py ~/.config/qtile/config.ini
 # --- Default Targets -------------------------------------------------------------
 install: config
+	@echo "Yes" | sudo pacman --noconfirm -S python3-pip 
 	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_TOOLS)
+	@pip install qtile
 uninstall:
 	@echo "Yes" | sudo pacman --noconfirm -R $(MPS_TOOLS)
+	@pip uninstall qtile
 status: 
 	@echo "Unknown"

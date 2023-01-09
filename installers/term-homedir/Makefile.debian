@@ -30,6 +30,7 @@ bash:
 ~/.ssh/id_rsa:
 	@echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 1>/dev/null
 folders: 
+	@mkdir -p ~/.local/bin
 	@for mpsdir in $(FOLDERS) ; do \
 		mkdir -p $(MPS_ROOT)/$$mpsdir ; \
 	done ;

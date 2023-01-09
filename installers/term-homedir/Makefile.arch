@@ -31,6 +31,7 @@ bash:
 	@echo "Yes" | sudo pacman --noconfirm -S core/openssh
 	@echo "y" | ssh-keygen -f ~/.ssh/id_rsa -t rsa -N '' 1>/dev/null
 folders: 
+	@mkdir -p ~/.local/bin
 	@for mpsdir in $(FOLDERS) ; do \
 		mkdir -p $(MPS_ROOT)/$$mpsdir ; \
 	done ;
