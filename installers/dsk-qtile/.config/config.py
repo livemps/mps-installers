@@ -278,7 +278,7 @@ screens = [
                                     no_update_string='(0)',
                                     execute='kitty --title Update --hold sudo apt update && sudo apt upgrade'),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %H:%M:%S"),
+                widget.Clock(format="%Y-%m-%d %a %H:%M:%S", timezone=""),
             ], 24,border_color=barBorderColor,border_width=barBorderWidth,
                        background=barColor,margin=marginBar,opacity=opacityBar),
         ),
