@@ -25,10 +25,11 @@ config:
 	@sudo cp .config/qtile.desktop /usr/share/xsessions/qtile.desktop
 	@cp .config/.xsessionrc ~
 	mkdir -p ~/.config/qtile
-	cp .config/config.py ~/.config/qtile/config.ini
+	cp .config/config.py ~/.config/qtile/config.py
 # --- Default Targets -------------------------------------------------------------
 install: config
 	@echo "Yes" | sudo pacman --noconfirm -S python-pip 
+	pip install xcffib ; pip install cairocffi # order does matter!
 	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_TOOLS)
 	@pip install qtile
 uninstall:
