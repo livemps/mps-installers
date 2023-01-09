@@ -10,7 +10,7 @@ MPS_GUI_WMTOOLS		:= feh lightdm lightdm-gtk-greeter picom
 MPS_GUI_TERMINAL    := kitty tilda 
 MPS_GUI_SOUND	    := pipewire-pulse pavucontrol volumeicon
 MPS_DSK_NETWORK		:= networkmanager network-manager-applet
-MPS_DSK_GNOME_TOOLS := gnome-system-monitor gedit gedit-plugins
+MPS_DSK_GNOME_TOOLS := gnome-system-monitor gedit gedit-plugins pango cairo
 MPS_ALL				:= $(MPS_GUI_ESSENTIALS) $(MPS_GUI_WMTOOLS) \
 					   $(MPS_GUI_TERMINAL) $(MPS_GUI_SOUND) \
 					   $(MPS_DSK_NETWORK) $(MPS_DSK_GNOME_TOOLS)

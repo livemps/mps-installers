@@ -3,7 +3,7 @@
 .ONESHELL:
 default: install
 .PHONY: default help install uninstall status config
-MPS_TOOLS := libpangocairo-1.0-0 python3-xcffib python3-cairocffi
+MPS_TOOLS := pango python-xcffib python-cairocffi python3-psutil
 # +++++ Help ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 help:
 	@echo ""
@@ -23,7 +23,7 @@ help:
 config: 
 	@-sudo mkdir -p /usr/share/xsessions
 	@sudo cp .config/qtile.desktop /usr/share/xsessions/qtile.desktop
-	@cp .config/.xprofile ~
+	@cp .config/.xsessionrc ~
 	mkdir -p ~/.config/qtile
 	cp .config/config.py ~/.config/qtile/config.ini
 # --- Default Targets -------------------------------------------------------------
