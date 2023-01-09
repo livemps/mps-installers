@@ -5,7 +5,7 @@ SNIPPETS=~/mps/snippets
 $SNIPPETS/autostart_clean.sh
 
 # Force always
-xrandr -s 1680x1050 &
+#xrandr -s 1680x1050 &
 xrandr -s 1920x1080 &
 xset s off &
 xset -dpms &

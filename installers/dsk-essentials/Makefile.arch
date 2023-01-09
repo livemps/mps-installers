@@ -46,7 +46,7 @@ install: config
 	@sudo systemctl start NetworkManager
 	@dconf dump /org/gnome/gnome-system-monitor/
 	@dconf reset -f /org/gnome/gnome-system-monitor/
-	@sudo service start dbus
+	@sudo systemctl start dbus
 	@sudo chsh -s /bin/bash $(USER)
 
 uninstall:
