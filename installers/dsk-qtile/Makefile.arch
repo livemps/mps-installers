@@ -22,13 +22,13 @@ help:
 # --- Fonts Download ------------------------------------------------------------
 config: 
 	@-sudo mkdir -p /usr/share/xsessions
-	@sudo cp config-qtile/qtile.desktop /usr/share/xsessions/qtile.desktop
-	@cp config-qtile/.xprofile ~
+	@sudo cp .config/qtile.desktop /usr/share/xsessions/qtile.desktop
+	@cp .config/.xprofile ~
 	mkdir -p ~/.config/qtile
-	cp config-qtile/config.py ~/.config/qtile/config.ini
+	cp .config/config.py ~/.config/qtile/config.ini
 # --- Default Targets -------------------------------------------------------------
 install: config
-	@echo "Yes" | sudo pacman --noconfirm -S python3-pip 
+	@echo "Yes" | sudo pacman --noconfirm -S python-pip 
 	@echo "Yes" | sudo pacman --noconfirm -S $(MPS_TOOLS)
 	@pip install qtile
 uninstall:

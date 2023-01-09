@@ -1,7 +1,7 @@
 # +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Makefile Setup ---#
 default: install
-.PHONY: default help install uninstall status distrotest
+.PHONY: default help install uninstall config distrotest
 # +++++ Environment checks ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Early Shells 
 DISTROTEST_DEBIAN 	:= $(shell lsb_release -is)
@@ -29,7 +29,7 @@ help:
 	@echo "         help      : Help menu"
 	@echo "         install   : Install components"
 	@echo "         uninstall : Uninstall components"
-	@echo "         status    : Current status"
+	@echo "         config    : Configure config"
 	@echo ""
 	@echo "  Example: make DISTRO=debian install "
 	@echo ""
@@ -44,5 +44,5 @@ install: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) $@
 uninstall: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) $@
-status: distrotest
+config: distrotest
 	@make --no-print-directory -f Makefile.$(MKEXT) $@
