@@ -1,7 +1,8 @@
 # +++++ Configuration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 # --- Makefile Setup ---#
 default: install
-.PHONY: default help install uninstall status usertest distrotest upgrade
+.PHONY: default help install uninstall status usertest distrotest upgrade \
+			term-min term-std term-max dsk-min dsk-std dsk-max
 # --- MPS Setup ---#
 INST ?= mpsfolders
 define doJobs
