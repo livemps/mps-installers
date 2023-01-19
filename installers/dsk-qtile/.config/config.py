@@ -89,7 +89,7 @@ groups = [Group("1", layout="monadtall", label="1  "),
                     "thunderbird-default", "mumble", "zoom"])]),
           Group("8", layout="max", label="8  "),
           Group("9", layout="max", label="9  ", 
-                matches=[Match(wm_class=["Gmpc"])])]
+                matches=[Match(wm_class=["Gmpc","Spotify"])])]
 ###############################################################################
 # Keys
 ###############################################################################
