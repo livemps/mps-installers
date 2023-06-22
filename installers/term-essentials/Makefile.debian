@@ -5,7 +5,7 @@ default: install
 .PHONY: default help install uninstall status
 # --- Installers Setup ---#
 MPS_ESSENTIALS 	:= lsb-release psmisc psutils htop git tree fontconfig \
-				   	debconf debconf-utils python3
+				   	debconf debconf-utils python3 bat tmux fdfind fzf
 MPS_TRANSPORT	:= ca-certificates curl wget gnupg 
 MPS_ARCHIVES	:= zip unzip bzip2
 MPS_BASHUTILS   := cowsay fortune fortunes-de fortunes-off cmatrix console-setup

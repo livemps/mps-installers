@@ -37,7 +37,7 @@ $(VIMPLUG_FOLDER):
 vimrc:
 	cp dotfiles/.vimrc ~/.vimrc
 vim: ./vim90 vimrc $(VIMPLUG_FOLDER)
-	cd vim90 && ./configure && make -j32 && sudo make install
+	cd vim90 && ./configure --enable-clipboard && make -j32 && sudo make install
 	rm -rf ./vim-9.0.tar.bz2
 vim-uninstall:
 	cd vim90 && sudo make uninstall
